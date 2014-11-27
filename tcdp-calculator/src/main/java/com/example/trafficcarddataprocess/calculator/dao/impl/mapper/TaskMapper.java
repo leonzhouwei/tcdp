@@ -6,6 +6,6 @@ import com.example.trafficcarddataprocess.calculator.domain.Task;
 
 public interface TaskMapper {
 	
-	List<Task> selectAll();
+	List<Task> selectAllTasks();
 
 }

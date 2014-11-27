@@ -20,7 +20,7 @@ public class TaskMapperTest {
 
 	@Test
 	public void testSelectAll() {
-		List<Task> result = taskMapper.selectAll();
+		List<Task> result = taskMapper.selectAllTasks();
 		for (Task e : result) {
 			System.out.print(e.getId());
 			System.out.print(", ");

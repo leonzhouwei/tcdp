@@ -16,7 +16,7 @@
 		<result property="expectedSampleCapacity" column="expected_sample_capacity" />
 	</resultMap>
 
-	<select id="selectAll" resultMap="taskResultMap">
+	<select id="selectAllTasks" resultMap="taskResultMap">
 		SELECT * FROM jiaotong_task
 	</select>
 
