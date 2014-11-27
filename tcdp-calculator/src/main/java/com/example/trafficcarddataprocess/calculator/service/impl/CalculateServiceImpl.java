@@ -23,10 +23,23 @@ public class CalculateServiceImpl implements CalculateService {
 	public Double calculateAverageSpeed(Task task, Road road) {
 		long taskId = task.getId();
 		long roadId = road.getId();
-		List<TaskRoadPassingCarRecord> result = dao.findAllByTaskAndRoad(taskId, roadId);
+		List<TaskRoadPassingCarRecord> result = dao.findAllByTaskAndRoad(
+				taskId, roadId);
 		if (result.isEmpty()) {
 			return null;
 		}
+
+		return calculateAverageSpeed(result, road.getLength());
+	}
+
+	/**
+	 * 
+	 * @param result
+	 * @param length  in kilometers
+	 * @return  speed in km/h
+	 */
+	static Double calculateAverageSpeed(List<TaskRoadPassingCarRecord> result,
+			final double length) {
 		// filter
 		TaskRoadPassingCarRecord first = result.get(0);
 		final int cardCount = first.getCardCount();
@@ -44,13 +57,16 @@ public class CalculateServiceImpl implements CalculateService {
 			for (String e : jsonList) {
 				list.addAll(TaskRoadPassingCarRecordPassInfo.parseList(e));
 			}
-			return TaskRoadPassingCarRecordPassInfo.calculateSingleCardTaskRoadAverageSpeed(list);
+			return TaskRoadPassingCarRecordPassInfo
+					.calculateSingleCardTaskRoadAverageSpeed(list);
 		} else if (cardCount == 2) {
-			List<List<TaskRoadPassingCarRecordPassInfo>> list = Lists.newArrayList();
+			List<List<TaskRoadPassingCarRecordPassInfo>> list = Lists
+					.newArrayList();
 			for (String e : jsonList) {
 				list.add(TaskRoadPassingCarRecordPassInfo.parseList(e));
 			}
-			return TaskRoadPassingCarRecordPassInfo.calculateTwoCardTaskRoadAverageSpeed(road.getLength(), list);
+			return TaskRoadPassingCarRecordPassInfo
+					.calculateDoubleCardTaskRoadAverageSpeed(length, list);
 		} else {
 			return null;
 		}

@@ -18,6 +18,11 @@ public class TaskRoadPassingCarRecordPassInfo {
 	private Date time;
 	private Double speed; // km/h
 	
+	/**
+	 * 
+	 * @param c
+	 * @return  speed in km/h
+	 */
 	public static Double calculateSingleCardTaskRoadAverageSpeed(Collection<TaskRoadPassingCarRecordPassInfo> c) {
 		if (c.isEmpty()) {
 			return null;
@@ -34,8 +39,12 @@ public class TaskRoadPassingCarRecordPassInfo {
 	
 	/**
 	 * inner list whose size is less than 2 will be ignored
+	 * 
+	 * @param length  in kilometers
+	 * @param c
+	 * @return  speed in km/h
 	 */
-	public static Double calculateTwoCardTaskRoadAverageSpeed(final Double length, Collection<List<TaskRoadPassingCarRecordPassInfo>> c) {
+	public static Double calculateDoubleCardTaskRoadAverageSpeed(final Double length, Collection<List<TaskRoadPassingCarRecordPassInfo>> c) {
 		if (c.isEmpty() || length.compareTo(DOUBLE_ZERO) <= 0) {
 			return null;
 		}
