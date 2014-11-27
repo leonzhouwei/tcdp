@@ -4,6 +4,10 @@
 <mapper
 	namespace="com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskRoadPassingCarRecordMapper">
 
+    <sql id="defaultColumns">
+        id, task_id, road_id, car_no, pass_info, pass_count, status
+    </sql>
+
 	<resultMap id="resultMap"
 		type="com.example.trafficcarddataprocess.calculator.domain.TaskRoadPassingCarRecord">
 		<result property="id" column="id" />
@@ -23,5 +27,12 @@
 		resultMap="resultMap">
 		SELECT * FROM jiaotong_car_list WHERE task_id = #{taskId}
 	</select>
+	
+	<select id="selectByTaskIdAndRoadId" parameterType="map"
+        resultMap="resultMap">
+        SELECT <include refid="defaultColumns" /> 
+        FROM jiaotong_car_list 
+        WHERE task_id = #{taskId} AND road_id = #{roadId}
+    </select>
 
 </mapper>
