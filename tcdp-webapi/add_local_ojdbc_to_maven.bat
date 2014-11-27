@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=D:/lib/java/ojdbc14.jar -DgroupId=com.oracle -DartifactId=ojdbc14 -Dversion=10.2.0.1.0 -Dpackaging=jar
