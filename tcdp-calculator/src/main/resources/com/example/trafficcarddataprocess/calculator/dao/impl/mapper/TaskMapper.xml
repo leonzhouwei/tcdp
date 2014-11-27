@@ -19,5 +19,9 @@
 	<select id="selectAllTasks" resultMap="taskResultMap">
 		SELECT * FROM jiaotong_task
 	</select>
+	
+	<select id="selectTask" parameterType="java.lang.Long" resultMap="taskResultMap">
+        SELECT * FROM jiaotong_task where id = #{id}
+    </select>
 
 </mapper>

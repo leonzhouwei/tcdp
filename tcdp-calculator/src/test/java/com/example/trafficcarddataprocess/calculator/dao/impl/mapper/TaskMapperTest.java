@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.trafficcarddataprocess.calculator.App;
 import com.example.trafficcarddataprocess.calculator.domain.Task;
 
@@ -37,6 +38,13 @@ public class TaskMapperTest {
 			System.out.print(e.getOutputStatus());
 			System.out.println();
 		}
+	}
+	
+	@Test
+	public void testSelectTask() {
+		final Long id = 1L;
+		Task task = taskMapper.selectTask(id);
+		System.out.println(JSONObject.toJSONString(task));
 	}
 
 }

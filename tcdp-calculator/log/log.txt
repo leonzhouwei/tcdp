@@ -1,3 +1,9 @@
 2014-11-27 12:22:18,798 [main | com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskMapper.selectAll.debug(Slf4jImpl.java:47)] DEBUG - ooo Using Connection [ProxyConnection[PooledConnection[oracle.jdbc.driver.T4CConnection@2f098b2]]]
 2014-11-27 12:22:18,802 [main | com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskMapper.selectAll.debug(Slf4jImpl.java:47)] DEBUG - ==>  Preparing: SELECT * FROM jiaotong_task 
 2014-11-27 12:22:18,942 [main | com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskMapper.selectAll.debug(Slf4jImpl.java:47)] DEBUG - ==> Parameters: 
+2014-11-27 16:20:05,468 [main | com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskMapper.selectAllTasks.debug(Slf4jImpl.java:47)] DEBUG - ooo Using Connection [ProxyConnection[PooledConnection[oracle.jdbc.driver.T4CConnection@4307dfbd]]]
+2014-11-27 16:20:05,484 [main | com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskMapper.selectAllTasks.debug(Slf4jImpl.java:47)] DEBUG - ==>  Preparing: SELECT * FROM jiaotong_task 
+2014-11-27 16:20:05,609 [main | com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskMapper.selectAllTasks.debug(Slf4jImpl.java:47)] DEBUG - ==> Parameters: 
+2014-11-27 16:20:05,733 [main | com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskMapper.selectTask.debug(Slf4jImpl.java:47)] DEBUG - ooo Using Connection [ProxyConnection[PooledConnection[oracle.jdbc.driver.T4CConnection@4307dfbd]]]
+2014-11-27 16:20:05,733 [main | com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskMapper.selectTask.debug(Slf4jImpl.java:47)] DEBUG - ==>  Preparing: SELECT * FROM jiaotong_task where id = ? 
+2014-11-27 16:20:05,733 [main | com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskMapper.selectTask.debug(Slf4jImpl.java:47)] DEBUG - ==> Parameters: 1(Long)
