@@ -5,7 +5,7 @@ public class TaskRoadPassingCarRecord {
 	private Long id;
 	private Long taskId;
 	private Long roadId;
-	private Long carNumber;
+	private String carNumber;
 	private String passInfoJson;
 	private Integer cardCount;
 	private Integer status;
@@ -34,11 +34,11 @@ public class TaskRoadPassingCarRecord {
 		this.roadId = roadId;
 	}
 
-	public Long getCarNumber() {
+	public String getCarNumber() {
 		return carNumber;
 	}
 
-	public void setCarNumber(Long carNumber) {
+	public void setCarNumber(String carNumber) {
 		this.carNumber = carNumber;
 	}
 

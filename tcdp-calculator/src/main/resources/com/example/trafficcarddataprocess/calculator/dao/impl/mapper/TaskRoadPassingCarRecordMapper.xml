@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskRoadPassingCarRecordMapper">
+
+	<resultMap id="resultMap"
+		type="com.example.trafficcarddataprocess.calculator.domain.TaskRoadPassingCarRecord">
+		<result property="id" column="id" />
+		<result property="taskId" column="task_id" />
+		<result property="roadId" column="road_id" />
+		<result property="carNumber" column="car_no" />
+		<result property="passInfoJson" column="pass_info" />
+		<result property="cardCount" column="pass_count" />
+		<result property="status" column="status" />
+	</resultMap>
+
+	<select id="selectAll" resultMap="resultMap">
+		SELECT * FROM jiaotong_car_list
+	</select>
+
+	<select id="selectByTaskId" parameterType="java.lang.Long"
+		resultMap="resultMap">
+		SELECT * FROM jiaotong_car_list WHERE task_id = #{taskId}
+	</select>
+
+</mapper>

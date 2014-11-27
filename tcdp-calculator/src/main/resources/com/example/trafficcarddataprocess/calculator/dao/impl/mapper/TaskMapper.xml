@@ -21,7 +21,7 @@
 	</select>
 	
 	<select id="selectTask" parameterType="java.lang.Long" resultMap="taskResultMap">
-        SELECT * FROM jiaotong_task where id = #{id}
+        SELECT * FROM jiaotong_task WHERE id = #{id}
     </select>
 
 </mapper>

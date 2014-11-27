@@ -12,7 +12,7 @@
     </resultMap>
 
     <select id="selectRoad" parameterType="java.lang.Long" resultMap="roadResultMap">
-        SELECT * FROM jiaotong_road_list where id = #{id}
+        SELECT * FROM jiaotong_road_list WHERE id = #{id}
     </select>
 
 </mapper>
