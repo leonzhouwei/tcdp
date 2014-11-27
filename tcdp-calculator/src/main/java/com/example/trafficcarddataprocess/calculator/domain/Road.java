@@ -4,7 +4,7 @@ public class Road {
 
 	private Long id;
 	private Integer cardCount;
-	private Double lenth; // in kilometers
+	private Double length; // in kilometers
 
 	public Long getId() {
 		return id;
@@ -22,12 +22,12 @@ public class Road {
 		this.cardCount = cardCount;
 	}
 
-	public Double getLenth() {
-		return lenth;
+	public Double getLength() {
+		return length;
 	}
 
-	public void setLenth(Double lenth) {
-		this.lenth = lenth;
+	public void setLength(Double length) {
+		this.length = length;
 	}
 
 }

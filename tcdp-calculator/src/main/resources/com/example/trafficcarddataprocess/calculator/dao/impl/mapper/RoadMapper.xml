@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.trafficcarddataprocess.calculator.dao.impl.mapper.RoadMapper">
+    
+        <resultMap id="roadResultMap"
+        type="com.example.trafficcarddataprocess.calculator.domain.Road">
+        <result property="id" column="id" />
+        <result property="cardCount" column="kks" />
+        <result property="length" column="length" />
+    </resultMap>
+
+    <select id="selectRoad" parameterType="java.lang.Long" resultMap="roadResultMap">
+        SELECT * FROM jiaotong_road_list where id = #{id}
+    </select>
+
+</mapper>
