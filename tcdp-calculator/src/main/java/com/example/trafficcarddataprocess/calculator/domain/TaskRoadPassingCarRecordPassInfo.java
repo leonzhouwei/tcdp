@@ -35,7 +35,7 @@ public class TaskRoadPassingCarRecordPassInfo {
 	/**
 	 * inner list whose size is less than 2 will be ignored
 	 */
-	public static Double calculateDoubleCardTaskRoadAverageSpeed(final Double length, Collection<List<TaskRoadPassingCarRecordPassInfo>> c) {
+	public static Double calculateTwoCardTaskRoadAverageSpeed(final Double length, Collection<List<TaskRoadPassingCarRecordPassInfo>> c) {
 		if (c.isEmpty() || length.compareTo(DOUBLE_ZERO) <= 0) {
 			return null;
 		}

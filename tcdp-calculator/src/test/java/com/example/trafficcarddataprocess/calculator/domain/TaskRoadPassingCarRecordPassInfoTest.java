@@ -45,7 +45,7 @@ public class TaskRoadPassingCarRecordPassInfoTest {
 				.parseList(json);
 		List<List<TaskRoadPassingCarRecordPassInfo>> input = Lists.newArrayList();
 		input.add(list);
-		Double actual = TaskRoadPassingCarRecordPassInfo.calculateDoubleCardTaskRoadAverageSpeed(80.0, input);
+		Double actual = TaskRoadPassingCarRecordPassInfo.calculateTwoCardTaskRoadAverageSpeed(80.0, input);
 		Assert.assertEquals(expected, actual);
 	}
 
