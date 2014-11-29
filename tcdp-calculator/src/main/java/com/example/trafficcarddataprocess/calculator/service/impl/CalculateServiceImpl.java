@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.example.trafficcarddataprocess.calculator.dao.TaskRoadPassingCarRecordDao;
+import com.example.trafficcarddataprocess.calculator.dao.TaskRoadTrafficFlowDao;
 import com.example.trafficcarddataprocess.calculator.domain.Road;
 import com.example.trafficcarddataprocess.calculator.domain.Task;
 import com.example.trafficcarddataprocess.calculator.domain.TaskRoadPassingCarRecord;
@@ -26,13 +27,15 @@ public class CalculateServiceImpl implements CalculateService {
 	private static int SECONDS_PER_HOUR = 3600;
 	
 	@Autowired
-	private TaskRoadPassingCarRecordDao dao;
+	private TaskRoadPassingCarRecordDao passCarDao;
+	@Autowired
+	private TaskRoadTrafficFlowDao trafficFlowDao;
 
 	@Override
 	public Double calculateAverageSpeed(Task task, Road road) {
 		long taskId = task.getId();
 		long roadId = road.getId();
-		List<TaskRoadPassingCarRecord> result = dao.findAllByTaskIdAndRoadId(
+		List<TaskRoadPassingCarRecord> result = passCarDao.findAllByTaskIdAndRoadId(
 				taskId, roadId);
 		if (result.isEmpty()) {
 			return null;
