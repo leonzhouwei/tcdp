@@ -83,7 +83,7 @@ public class CalculateServiceImpl implements CalculateService {
 		}
 	}
 	
-	static Integer calculateTaskRoadTrafficFlow(List<TaskRoadTrafficFlow> list, final int seconds) {
+	static Long calculateTaskRoadTrafficFlow(List<TaskRoadTrafficFlow> list) {
 		// filter
 		TaskRoadTrafficFlow first = list.get(0);
 		final int cardCount = first.getCardCount();
@@ -100,14 +100,14 @@ public class CalculateServiceImpl implements CalculateService {
 				List<TaskRoadTrafficFlowPassInfo> info = TaskRoadTrafficFlowPassInfo.parseList(e.getPassInfoJson());
 				infoList.addAll(info);
 			}
-			return calculateSingleCardTaskRoadTrafficFlow(seconds, infoList);
+			return calculateSingleCardTaskRoadTrafficFlow(infoList);
 		} else if (cardCount == 2) {
 			List<TaskRoadTrafficFlowPassInfo> infoList = Lists.newArrayList();
 			for (TaskRoadTrafficFlow e : filtered) {
 				List<TaskRoadTrafficFlowPassInfo> info = TaskRoadTrafficFlowPassInfo.parseList(e.getPassInfoJson());
 				infoList.addAll(info);
 			}
-			return calculateDoubleCardTaskRoadTrafficFlow(seconds, infoList);
+			return calculateDoubleCardTaskRoadTrafficFlow(infoList);
 		} else {
 			return null;
 		}
@@ -175,8 +175,8 @@ public class CalculateServiceImpl implements CalculateService {
 		return result;
 	}
 	
-	public static Integer calculateSingleCardTaskRoadTrafficFlow(final int seconds, Collection<TaskRoadTrafficFlowPassInfo> c) {
-		if (c.isEmpty() || seconds < 0) {
+	public static Long calculateSingleCardTaskRoadTrafficFlow(Collection<TaskRoadTrafficFlowPassInfo> c) {
+		if (c.isEmpty()) {
 			return null;
 		}
 		
@@ -184,12 +184,11 @@ public class CalculateServiceImpl implements CalculateService {
 		for (TaskRoadTrafficFlowPassInfo e : c) {
 			sum += e.getPassCarCount();
 		}
-		int result = (int) (sum / seconds);
-		return result;
+		return sum;
 	}
 	
-	public static Integer calculateDoubleCardTaskRoadTrafficFlow(final int seconds, Collection<TaskRoadTrafficFlowPassInfo> c) {
-		Integer result = calculateSingleCardTaskRoadTrafficFlow(seconds, c);
+	public static Long calculateDoubleCardTaskRoadTrafficFlow(Collection<TaskRoadTrafficFlowPassInfo> c) {
+		Long result = calculateSingleCardTaskRoadTrafficFlow(c);
 		if (result == null) {
 			return result;
 		}
