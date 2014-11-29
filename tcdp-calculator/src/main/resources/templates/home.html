@@ -17,17 +17,19 @@
 					Thymeleaf - Layout </a>
 			</div>
 		</div>
-		<div>
-			<form th:action="@{/calculation}" method="post">
-				<ul>
-					<li><label>任务Id:</label></li>
-					<li><input name="taskId" type="text"></input></li>
-					<li><label>路段Id:</label></li>
-					<li><input name="roadId" type="text"></input></li>
-					<li><button type="submit" class="btn btn-primary">计算</button></li>
-				</ul>
-			</form>
-		</div>
+		<form th:action="@{/calculation}" method="post" role="form">
+			<div class="form-group">
+				<label for="task">任务 ID:</label> 
+				<input type="text"
+					class="form-control" id="task" name="taskId" placeholder="1" />
+			</div>
+			<div class="form-group">
+				<label for="roadSection">路段 ID:</label> 
+				<input type="text"
+					class="form-control" id="roadSection" name="roadId" placeholder="1" />
+			</div>
+			<button type="submit" class="btn btn-default">计算</button>
+		</form>
 	</div>
 </body>
 </html>
