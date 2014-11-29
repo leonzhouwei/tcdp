@@ -7,7 +7,7 @@ public class Result {
 	private Long roadId;
 	private Double averageSpeed;
 	private Double averageSpeedConfidence;
-	private Integer trafficFlow;
+	private Long trafficFlow;
 	private Double trafficFlowConfidence;
 	private Integer status;
 
@@ -35,11 +35,11 @@ public class Result {
 		this.averageSpeedConfidence = averageSpeedConfidence;
 	}
 
-	public Integer getTrafficFlow() {
+	public Long getTrafficFlow() {
 		return trafficFlow;
 	}
 
-	public void setTrafficFlow(Integer trafficFlow) {
+	public void setTrafficFlow(Long trafficFlow) {
 		this.trafficFlow = trafficFlow;
 	}
 

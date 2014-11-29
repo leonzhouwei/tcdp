@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.trafficcarddataprocess.calculator.dao.TaskRoadPassingCarRecordDao;
 import com.example.trafficcarddataprocess.calculator.dao.TaskRoadTrafficFlowDao;
+import com.example.trafficcarddataprocess.calculator.domain.Result;
 import com.example.trafficcarddataprocess.calculator.domain.Road;
 import com.example.trafficcarddataprocess.calculator.domain.Task;
 import com.example.trafficcarddataprocess.calculator.domain.TaskRoadPassingCarRecord;
@@ -30,6 +31,20 @@ public class CalculateServiceImpl implements CalculateService {
 	private TaskRoadPassingCarRecordDao passCarDao;
 	@Autowired
 	private TaskRoadTrafficFlowDao trafficFlowDao;
+	
+	@Override
+	public Result calculate(Task task, Road road) {
+		double averageSpeed = calculateAverageSpeed(task, road);
+		long trafficFlow = calculateTrafficFlow(task, road);
+		Result result = new Result();
+		result.setId(-1L);
+		result.setTaskId(task.getId());
+		result.setRoadId(road.getId());
+		result.setAverageSpeed(averageSpeed);
+		result.setTrafficFlow(trafficFlow);
+		
+		return result;
+	}
 
 	@Override
 	public Double calculateAverageSpeed(Task task, Road road) {
@@ -42,12 +57,20 @@ public class CalculateServiceImpl implements CalculateService {
 		}
 
 		Double length = new Double(road.getLength());
-		return calculateAverageSpeed(result, length);
+		double ret = calculateAverageSpeed(result, length);
+		return ret;
 	}
 	
+	@Override
 	public Long calculateTrafficFlow(Task task, Road road) {
-		// TODO
-		return null;
+		long taskId = task.getId();
+		long roadId = road.getId();
+		List<TaskRoadTrafficFlow> result = trafficFlowDao.findAllByTaskIdAndRoadId(taskId, roadId);
+		if (result.isEmpty()) {
+			return null;
+		}
+		long ret = calculateTaskRoadTrafficFlow(result);
+		return ret;
 	}
 	
 	/**

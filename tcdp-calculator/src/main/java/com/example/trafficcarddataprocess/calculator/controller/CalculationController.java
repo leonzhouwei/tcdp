@@ -32,7 +32,7 @@ public class CalculationController {
 			long roadId = i;
 			double speed = i;
 			double speedConfi = i;
-			int flow = i;
+			long flow = i;
 			double flowConfi = i;
 			e.setId(id);
 			e.setTaskId(taskId);
