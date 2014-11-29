@@ -4,7 +4,7 @@ public class Result {
 
 	private Long id;
 	private Long taskId;
-	private Long roadId;
+	private Long roadSectionId;
 	private Double averageSpeed;
 	private Double averageSpeedConfidence;
 	private Long trafficFlow;
@@ -67,12 +67,12 @@ public class Result {
 		this.taskId = taskId;
 	}
 
-	public Long getRoadId() {
-		return roadId;
+	public Long getRoadSectionId() {
+		return roadSectionId;
 	}
 
-	public void setRoadId(Long roadId) {
-		this.roadId = roadId;
+	public void setRoadSectionId(Long roadId) {
+		this.roadSectionId = roadId;
 	}
 
 }

@@ -5,10 +5,10 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.example.trafficcarddataprocess.calculator.domain.TaskRoadPassingCarRecord;
-import com.example.trafficcarddataprocess.calculator.domain.TaskRoadPassingCarRecordPassInfo;
-import com.example.trafficcarddataprocess.calculator.domain.TaskRoadTrafficFlow;
-import com.example.trafficcarddataprocess.calculator.domain.TaskRoadTrafficFlowPassInfo;
+import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionPassingCarRecord;
+import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionPassingCarRecordPassInfo;
+import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionTrafficFlow;
+import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionTrafficFlowPassInfo;
 import com.google.common.collect.Lists;
 
 public class CalculateServiceImplAlgorithmTest {
@@ -17,7 +17,7 @@ public class CalculateServiceImplAlgorithmTest {
 	public void testCalculateSingleCardTaskRoadAverageSpeed() {
 		final Double expected = new Double(80.0);
 		String json = "[{\"sbbh\":\"1\", \"gcsj\":\"2014-11-19 08:14:00\", \"clsd\":\"80\"}]";
-		List<TaskRoadPassingCarRecordPassInfo> result = TaskRoadPassingCarRecordPassInfo
+		List<TaskRoadSectionPassingCarRecordPassInfo> result = TaskRoadSectionPassingCarRecordPassInfo
 				.parseList(json);
 		Double actual = CalculateServiceImpl.calculateSingleCardTaskRoadAverageSpeed(result);
 		Assert.assertEquals(expected, actual);
@@ -27,9 +27,9 @@ public class CalculateServiceImplAlgorithmTest {
 	public void testCalculateDoubleCardTaskRoadAverageSpeed() {
 		final Double expected = new Double(80.0);
 		String json = "[{\"sbbh\":\"1\", \"gcsj\":\"2014-11-19 00:00:00\", \"clsd\":\"-75\"},{\"sbbh\":\"2\", \"gcsj\":\"2014-11-19 01:00:00\", \"clsd\":\"-85\"}]";
-		List<TaskRoadPassingCarRecordPassInfo> list = TaskRoadPassingCarRecordPassInfo
+		List<TaskRoadSectionPassingCarRecordPassInfo> list = TaskRoadSectionPassingCarRecordPassInfo
 				.parseList(json);
-		List<List<TaskRoadPassingCarRecordPassInfo>> input = Lists.newArrayList();
+		List<List<TaskRoadSectionPassingCarRecordPassInfo>> input = Lists.newArrayList();
 		input.add(list);
 		Double length = new Double(80.0);
 		Double actual = CalculateServiceImpl.calculateDoubleCardTaskRoadAverageSpeed(length, input);
@@ -40,7 +40,7 @@ public class CalculateServiceImplAlgorithmTest {
 	public void testCalculateSingleCardTaskRoadTrafficFlow() {
 		final Long expected = 6L;
 		String json = "[{\"sbbh\":\"1\", \"gcsl\":\"2\"}, {\"sbbh\":\"1\", \"gcsl\":\"4\"}]";
-		List<TaskRoadTrafficFlowPassInfo> list = TaskRoadTrafficFlowPassInfo.parseList(json);
+		List<TaskRoadSectionTrafficFlowPassInfo> list = TaskRoadSectionTrafficFlowPassInfo.parseList(json);
 		Long actual = CalculateServiceImpl.calculateSingleCardTaskRoadTrafficFlow(list);
 		Assert.assertEquals(expected, actual);
 	}
@@ -49,7 +49,7 @@ public class CalculateServiceImplAlgorithmTest {
 	public void testCalculateDoubleCardTaskRoadTrafficFlow() {
 		final Long expected = 6L;
 		String json = "[{\"sbbh\":\"1\", \"gcsl\":\"4\"}, {\"sbbh\":\"2\", \"gcsl\":\"8\"}]";
-		List<TaskRoadTrafficFlowPassInfo> list = TaskRoadTrafficFlowPassInfo.parseList(json);
+		List<TaskRoadSectionTrafficFlowPassInfo> list = TaskRoadSectionTrafficFlowPassInfo.parseList(json);
 		Long actual = CalculateServiceImpl.calculateDoubleCardTaskRoadTrafficFlow(list);
 		Assert.assertEquals(expected, actual);
 	}
@@ -59,14 +59,14 @@ public class CalculateServiceImplAlgorithmTest {
 	 */
 	@Test
 	public void testCalculateAverageSpeedTaskRoad_1() {
-		TaskRoadPassingCarRecord instance = new TaskRoadPassingCarRecord();
+		TaskRoadSectionPassingCarRecord instance = new TaskRoadSectionPassingCarRecord();
 		instance.setId(1L);
 		instance.setTaskId(1L);
-		instance.setRoadId(1L);
+		instance.setRoadSectionId(1L);
 		instance.setCarNumber("test");
 		instance.setCardCount(1);
 		instance.setPassInfoJson("[{\"sbbh\":\"1\", \"gcsj\":\"2014-11-19 08:14:00\", \"clsd\":\"80\"}]");
-		List<TaskRoadPassingCarRecord> result = Lists.newArrayList(instance);
+		List<TaskRoadSectionPassingCarRecord> result = Lists.newArrayList(instance);
 		final Double expected = new Double(80.0); 
 		Double length = new Double(800.0);
 		Double actual = CalculateServiceImpl.calculateAverageSpeed(result, length);
@@ -84,14 +84,14 @@ public class CalculateServiceImplAlgorithmTest {
 		sb.append(",");
 		sb.append("{\"sbbh\":\"2\", \"gcsj\":\"2014-11-19 08:14:00\", \"clsd\":\"85\"}");
 		sb.append("]");
-		TaskRoadPassingCarRecord instance = new TaskRoadPassingCarRecord();
+		TaskRoadSectionPassingCarRecord instance = new TaskRoadSectionPassingCarRecord();
 		instance.setId(1L);
 		instance.setTaskId(1L);
-		instance.setRoadId(1L);
+		instance.setRoadSectionId(1L);
 		instance.setCarNumber("test_car_num");
 		instance.setCardCount(1);
 		instance.setPassInfoJson(sb.toString());
-		List<TaskRoadPassingCarRecord> result = Lists.newArrayList(instance);
+		List<TaskRoadSectionPassingCarRecord> result = Lists.newArrayList(instance);
 		final Double expected = new Double(80.0); 
 		Double length = new Double(800.0);
 		Double actual = CalculateServiceImpl.calculateAverageSpeed(result, length);
@@ -109,14 +109,14 @@ public class CalculateServiceImplAlgorithmTest {
 		sb.append(",");
 		sb.append("{\"sbbh\":\"2\", \"gcsj\":\"2014-11-19 01:00:00\", \"clsd\":\"-85\"}");
 		sb.append("]");
-		TaskRoadPassingCarRecord instance = new TaskRoadPassingCarRecord();
+		TaskRoadSectionPassingCarRecord instance = new TaskRoadSectionPassingCarRecord();
 		instance.setId(1L);
 		instance.setTaskId(1L);
-		instance.setRoadId(1L);
+		instance.setRoadSectionId(1L);
 		instance.setCarNumber("test_car_num_1");
 		instance.setCardCount(2);
 		instance.setPassInfoJson(sb.toString());
-		List<TaskRoadPassingCarRecord> result = Lists.newArrayList(instance);
+		List<TaskRoadSectionPassingCarRecord> result = Lists.newArrayList(instance);
 		final Double expected = new Double(80.0); 
 		Double length = new Double(80.0);
 		Double actual = CalculateServiceImpl.calculateAverageSpeed(result, length);
@@ -137,10 +137,10 @@ public class CalculateServiceImplAlgorithmTest {
 		sb1.append(",");
 		sb1.append("{\"sbbh\":\"2\", \"gcsj\":\"2014-11-19 01:00:00\", \"clsd\":\"-85\"}");
 		sb1.append("]");
-		TaskRoadPassingCarRecord instance1 = new TaskRoadPassingCarRecord();
+		TaskRoadSectionPassingCarRecord instance1 = new TaskRoadSectionPassingCarRecord();
 		instance1.setId(1L);
 		instance1.setTaskId(taskId);
-		instance1.setRoadId(roadId);
+		instance1.setRoadSectionId(roadId);
 		instance1.setCarNumber("test_car_num_1");
 		instance1.setCardCount(cardCount);
 		instance1.setPassInfoJson(sb1.toString());
@@ -150,14 +150,14 @@ public class CalculateServiceImplAlgorithmTest {
 		sb2.append(",");
 		sb2.append("{\"sbbh\":\"2\", \"gcsj\":\"2014-11-19 01:00:00\", \"clsd\":\"-85\"}");
 		sb2.append("]");
-		TaskRoadPassingCarRecord instance2 = new TaskRoadPassingCarRecord();
+		TaskRoadSectionPassingCarRecord instance2 = new TaskRoadSectionPassingCarRecord();
 		instance2.setId(1L);
 		instance2.setTaskId(taskId);
-		instance2.setRoadId(roadId);
+		instance2.setRoadSectionId(roadId);
 		instance2.setCarNumber("test_car_num_1");
 		instance2.setCardCount(cardCount);
 		instance2.setPassInfoJson(sb2.toString());
-		List<TaskRoadPassingCarRecord> result = Lists.newArrayList(instance1, instance2);
+		List<TaskRoadSectionPassingCarRecord> result = Lists.newArrayList(instance1, instance2);
 		final Double expected = new Double(80.0); 
 		Double length = new Double(80.0);
 		Double actual = CalculateServiceImpl.calculateAverageSpeed(result, length);
@@ -173,13 +173,13 @@ public class CalculateServiceImplAlgorithmTest {
 		final long roadId = 1L;
 		final int cardCount = 1;
 		final String json = "[{\"sbbh\":\"1\", \"gcsl\":\"1\"}]";
-		TaskRoadTrafficFlow instance = new TaskRoadTrafficFlow();
+		TaskRoadSectionTrafficFlow instance = new TaskRoadSectionTrafficFlow();
 		instance.setId(1L);
 		instance.setTaskId(taskId);
-		instance.setRoadId(roadId);
+		instance.setRoadSectionId(roadId);
 		instance.setCardCount(cardCount);
 		instance.setPassInfoJson(json);
-		List<TaskRoadTrafficFlow> list = Lists.newArrayList(instance);
+		List<TaskRoadSectionTrafficFlow> list = Lists.newArrayList(instance);
 		final Long expected = 1L;
 		Long actual = CalculateServiceImpl.calculateTaskRoadTrafficFlow(list);
 		Assert.assertEquals(expected, actual);
@@ -194,13 +194,13 @@ public class CalculateServiceImplAlgorithmTest {
 		final long roadId = 1L;
 		final int cardCount = 1;
 		final String json = "[{\"sbbh\":\"1\", \"gcsl\":\"2\"}]";
-		TaskRoadTrafficFlow instance = new TaskRoadTrafficFlow();
+		TaskRoadSectionTrafficFlow instance = new TaskRoadSectionTrafficFlow();
 		instance.setId(1L);
 		instance.setTaskId(taskId);
-		instance.setRoadId(roadId);
+		instance.setRoadSectionId(roadId);
 		instance.setCardCount(cardCount);
 		instance.setPassInfoJson(json);
-		List<TaskRoadTrafficFlow> list = Lists.newArrayList(instance);
+		List<TaskRoadSectionTrafficFlow> list = Lists.newArrayList(instance);
 		final Long expected = 2L;
 		Long actual = CalculateServiceImpl.calculateTaskRoadTrafficFlow(list);
 		Assert.assertEquals(expected, actual);
@@ -221,13 +221,13 @@ public class CalculateServiceImplAlgorithmTest {
 		sb.append("{\"sbbh\":\"2\", \"gcsl\":\"1\"}");
 		sb.append("]");
 		final String json = sb.toString();
-		TaskRoadTrafficFlow instance = new TaskRoadTrafficFlow();
+		TaskRoadSectionTrafficFlow instance = new TaskRoadSectionTrafficFlow();
 		instance.setId(1L);
 		instance.setTaskId(taskId);
-		instance.setRoadId(roadId);
+		instance.setRoadSectionId(roadId);
 		instance.setCardCount(cardCount);
 		instance.setPassInfoJson(json);
-		List<TaskRoadTrafficFlow> list = Lists.newArrayList(instance);
+		List<TaskRoadSectionTrafficFlow> list = Lists.newArrayList(instance);
 		final Long expected = 1L;
 		Long actual = CalculateServiceImpl.calculateTaskRoadTrafficFlow(list);
 		Assert.assertEquals(expected, actual);
@@ -248,13 +248,13 @@ public class CalculateServiceImplAlgorithmTest {
 		sb.append("{\"sbbh\":\"2\", \"gcsl\":\"2\"}");
 		sb.append("]");
 		final String json = sb.toString();
-		TaskRoadTrafficFlow instance = new TaskRoadTrafficFlow();
+		TaskRoadSectionTrafficFlow instance = new TaskRoadSectionTrafficFlow();
 		instance.setId(1L);
 		instance.setTaskId(taskId);
-		instance.setRoadId(roadId);
+		instance.setRoadSectionId(roadId);
 		instance.setCardCount(cardCount);
 		instance.setPassInfoJson(json);
-		List<TaskRoadTrafficFlow> list = Lists.newArrayList(instance);
+		List<TaskRoadSectionTrafficFlow> list = Lists.newArrayList(instance);
 		final Long expected = 2L;
 		Long actual = CalculateServiceImpl.calculateTaskRoadTrafficFlow(list);
 		Assert.assertEquals(expected, actual);
@@ -275,13 +275,13 @@ public class CalculateServiceImplAlgorithmTest {
 		sb.append("{\"sbbh\":\"2\", \"gcsl\":\"6\"}");
 		sb.append("]");
 		final String json = sb.toString();
-		TaskRoadTrafficFlow instance = new TaskRoadTrafficFlow();
+		TaskRoadSectionTrafficFlow instance = new TaskRoadSectionTrafficFlow();
 		instance.setId(1L);
 		instance.setTaskId(taskId);
-		instance.setRoadId(roadId);
+		instance.setRoadSectionId(roadId);
 		instance.setCardCount(cardCount);
 		instance.setPassInfoJson(json);
-		List<TaskRoadTrafficFlow> list = Lists.newArrayList(instance);
+		List<TaskRoadSectionTrafficFlow> list = Lists.newArrayList(instance);
 		final Long expected = 5L;
 		Long actual = CalculateServiceImpl.calculateTaskRoadTrafficFlow(list);
 		Assert.assertEquals(expected, actual);

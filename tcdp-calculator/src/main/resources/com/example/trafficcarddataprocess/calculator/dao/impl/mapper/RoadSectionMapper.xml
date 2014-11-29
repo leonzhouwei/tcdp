@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper
-	namespace="com.example.trafficcarddataprocess.calculator.dao.impl.mapper.RoadMapper">
+	namespace="com.example.trafficcarddataprocess.calculator.dao.impl.mapper.RoadSectionMapper">
     
         <resultMap id="roadResultMap"
-        type="com.example.trafficcarddataprocess.calculator.domain.Road">
+        type="com.example.trafficcarddataprocess.calculator.domain.RoadSection">
         <result property="id" column="id" />
         <result property="cardCount" column="kks" />
         <result property="length" column="road_length" />

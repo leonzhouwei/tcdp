@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper
-	namespace="com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskRoadPassingCarRecordMapper">
+	namespace="com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskRoadSectionPassingCarRecordMapper">
 
     <sql id="defaultColumns">
         id, task_id, road_id, car_no, pass_info, pass_count, status
     </sql>
 
 	<resultMap id="resultMap"
-		type="com.example.trafficcarddataprocess.calculator.domain.TaskRoadPassingCarRecord">
+		type="com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionPassingCarRecord">
 		<result property="id" column="id" />
 		<result property="taskId" column="task_id" />
 		<result property="roadId" column="road_id" />

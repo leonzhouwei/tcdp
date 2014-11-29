@@ -36,7 +36,7 @@ public class CalculationController {
 			double flowConfi = i;
 			e.setId(id);
 			e.setTaskId(taskId);
-			e.setRoadId(roadId);
+			e.setRoadSectionId(roadId);
 			e.setAverageSpeed(speed);
 			e.setAverageSpeedConfidence(speedConfi);
 			e.setTrafficFlow(flow);

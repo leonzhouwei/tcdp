@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.trafficcarddataprocess.calculator.dao.TaskRoadPassingCarRecordDao;
+import com.example.trafficcarddataprocess.calculator.dao.TaskRoadSectionPassingCarRecordDao;
 import com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskMapper;
 import com.example.trafficcarddataprocess.calculator.domain.Result;
 import com.example.trafficcarddataprocess.calculator.domain.Task;
@@ -18,7 +18,7 @@ public class TaskServiceImpl implements TaskService {
 	@Autowired
 	private TaskMapper taskMapper;
 	@Autowired
-	private TaskRoadPassingCarRecordDao passCarDao;
+	private TaskRoadSectionPassingCarRecordDao passCarDao;
 	@Autowired
 	private CalculateService calucateService;
 

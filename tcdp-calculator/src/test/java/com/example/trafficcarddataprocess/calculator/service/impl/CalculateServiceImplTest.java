@@ -9,7 +9,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.example.trafficcarddataprocess.calculator.App;
-import com.example.trafficcarddataprocess.calculator.domain.Road;
+import com.example.trafficcarddataprocess.calculator.domain.RoadSection;
 import com.example.trafficcarddataprocess.calculator.domain.Task;
 import com.google.common.collect.Lists;
 
@@ -20,7 +20,7 @@ public class CalculateServiceImplTest {
 	@Autowired
 	private TaskServiceImpl taskService;
 	@Autowired
-	private RoadServiceImpl roadService;
+	private RoadSectionServiceImpl roadService;
 	@Autowired
 	private CalculateServiceImpl service;
 
@@ -28,7 +28,7 @@ public class CalculateServiceImplTest {
 		final long taskId = 39L;
 		final long roadId = 42595701381L;
 		Task task = taskService.findTask(taskId);
-		Road road = roadService.findRoad(roadId);
+		RoadSection road = roadService.findRoad(roadId);
 		System.out.println(road.getLength());
 		Double result = service.calculateAverageSpeed(task, road);
 		System.out.println(result);
@@ -38,7 +38,7 @@ public class CalculateServiceImplTest {
 		final long taskId = 39L;
 		final long roadId = 42595701382L;
 		Task task = taskService.findTask(taskId);
-		Road road = roadService.findRoad(roadId);
+		RoadSection road = roadService.findRoad(roadId);
 		System.out.println(road.getLength());
 		Double result = service.calculateAverageSpeed(task, road);
 		System.out.println(result);
@@ -99,7 +99,7 @@ public class CalculateServiceImplTest {
 		roadIds.add(42595704540L);
 
 		for (Long e : roadIds) {
-			Road road = roadService.findRoad(e);
+			RoadSection road = roadService.findRoad(e);
 			Double result = service.calculateAverageSpeed(task, road);
 //			System.out.println(road.getId() + ", " + road.getLength() + ", "
 //					+ result);

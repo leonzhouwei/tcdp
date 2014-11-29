@@ -8,17 +8,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.trafficcarddataprocess.calculator.dao.TaskRoadPassingCarRecordDao;
-import com.example.trafficcarddataprocess.calculator.dao.TaskRoadTrafficFlowDao;
+import com.example.trafficcarddataprocess.calculator.dao.TaskRoadSectionPassingCarRecordDao;
+import com.example.trafficcarddataprocess.calculator.dao.TaskRoadSectionTrafficFlowDao;
 import com.example.trafficcarddataprocess.calculator.domain.Result;
-import com.example.trafficcarddataprocess.calculator.domain.Road;
+import com.example.trafficcarddataprocess.calculator.domain.RoadSection;
 import com.example.trafficcarddataprocess.calculator.domain.Task;
-import com.example.trafficcarddataprocess.calculator.domain.TaskRoadPassingCarRecord;
-import com.example.trafficcarddataprocess.calculator.domain.TaskRoadPassingCarRecordPassInfo;
-import com.example.trafficcarddataprocess.calculator.domain.TaskRoadTrafficFlow;
-import com.example.trafficcarddataprocess.calculator.domain.TaskRoadTrafficFlowPassInfo;
+import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionPassingCarRecord;
+import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionPassingCarRecordPassInfo;
+import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionTrafficFlow;
+import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionTrafficFlowPassInfo;
 import com.example.trafficcarddataprocess.calculator.service.CalculateService;
-import com.example.trafficcarddataprocess.calculator.service.RoadService;
+import com.example.trafficcarddataprocess.calculator.service.RoadSectionService;
 import com.google.common.collect.Lists;
 
 @Component
@@ -29,25 +29,25 @@ public class CalculateServiceImpl implements CalculateService {
 	private static int SECONDS_PER_HOUR = 3600;
 	
 	@Autowired
-	private TaskRoadPassingCarRecordDao passCarDao;
+	private TaskRoadSectionPassingCarRecordDao passCarDao;
 	@Autowired
-	private TaskRoadTrafficFlowDao trafficFlowDao;
+	private TaskRoadSectionTrafficFlowDao trafficFlowDao;
 	@Autowired
-	private RoadService roadService;
+	private RoadSectionService roadService;
 	
 	@Override
 	public List<Result> calculate(Task task) {
 		List<Result> ret = Lists.newArrayList();
 		final long taskId = task.getId();
 		// task and its related road sections
-		List<TaskRoadPassingCarRecord> list = passCarDao.findUndoneByTaskId(taskId);
+		List<TaskRoadSectionPassingCarRecord> list = passCarDao.findUndoneByTaskId(taskId);
 		if (list.isEmpty()) {
 			return ret;
 		}
-		for (TaskRoadPassingCarRecord e : list) {
+		for (TaskRoadSectionPassingCarRecord e : list) {
 			// road section
-			long roadSectionId = e.getRoadId();
-			Road roadSection = roadService.findRoad(roadSectionId);
+			long roadSectionId = e.getRoadSectionId();
+			RoadSection roadSection = roadService.findRoad(roadSectionId);
 			Result result = calculate(task, roadSection);
 			ret.add(result);
 		}
@@ -55,13 +55,13 @@ public class CalculateServiceImpl implements CalculateService {
 	}
 	
 	@Override
-	public Result calculate(Task task, Road road) {
+	public Result calculate(Task task, RoadSection road) {
 		double averageSpeed = calculateAverageSpeed(task, road);
 		long trafficFlow = calculateTrafficFlow(task, road);
 		Result result = new Result();
 		result.setId(-1L);
 		result.setTaskId(task.getId());
-		result.setRoadId(road.getId());
+		result.setRoadSectionId(road.getId());
 		result.setAverageSpeed(averageSpeed);
 		result.setTrafficFlow(trafficFlow);
 		
@@ -69,10 +69,10 @@ public class CalculateServiceImpl implements CalculateService {
 	}
 
 	@Override
-	public Double calculateAverageSpeed(Task task, Road road) {
+	public Double calculateAverageSpeed(Task task, RoadSection road) {
 		long taskId = task.getId();
 		long roadId = road.getId();
-		List<TaskRoadPassingCarRecord> result = passCarDao.findAllByTaskIdAndRoadId(
+		List<TaskRoadSectionPassingCarRecord> result = passCarDao.findAllByTaskIdAndRoadId(
 				taskId, roadId);
 		if (result.isEmpty()) {
 			return null;
@@ -84,10 +84,10 @@ public class CalculateServiceImpl implements CalculateService {
 	}
 	
 	@Override
-	public Long calculateTrafficFlow(Task task, Road road) {
+	public Long calculateTrafficFlow(Task task, RoadSection road) {
 		long taskId = task.getId();
 		long roadId = road.getId();
-		List<TaskRoadTrafficFlow> result = trafficFlowDao.findAllByTaskIdAndRoadId(taskId, roadId);
+		List<TaskRoadSectionTrafficFlow> result = trafficFlowDao.findAllByTaskIdAndRoadId(taskId, roadId);
 		if (result.isEmpty()) {
 			return null;
 		}
@@ -101,13 +101,13 @@ public class CalculateServiceImpl implements CalculateService {
 	 * @param length  in kilometers
 	 * @return  speed in km/h
 	 */
-	static Double calculateAverageSpeed(List<TaskRoadPassingCarRecord> result,
+	static Double calculateAverageSpeed(List<TaskRoadSectionPassingCarRecord> result,
 			Double length) {
 		// filter
-		TaskRoadPassingCarRecord first = result.get(0);
+		TaskRoadSectionPassingCarRecord first = result.get(0);
 		final int cardCount = first.getCardCount();
 		List<String> jsonList = Lists.newArrayList();
-		for (TaskRoadPassingCarRecord e : result) {
+		for (TaskRoadSectionPassingCarRecord e : result) {
 			if (e.getCardCount() != cardCount) {
 				continue;
 			}
@@ -117,17 +117,17 @@ public class CalculateServiceImpl implements CalculateService {
 		// calculate
 		if (cardCount == 1) {
 			logger.debug("single card task road section");
-			List<TaskRoadPassingCarRecordPassInfo> list = Lists.newArrayList();
+			List<TaskRoadSectionPassingCarRecordPassInfo> list = Lists.newArrayList();
 			for (String e : jsonList) {
-				list.addAll(TaskRoadPassingCarRecordPassInfo.parseList(e));
+				list.addAll(TaskRoadSectionPassingCarRecordPassInfo.parseList(e));
 			}
 			return calculateSingleCardTaskRoadAverageSpeed(list);
 		} else if (cardCount == 2) {
 			logger.debug("double card task road section");
-			List<List<TaskRoadPassingCarRecordPassInfo>> list = Lists
+			List<List<TaskRoadSectionPassingCarRecordPassInfo>> list = Lists
 					.newArrayList();
 			for (String e : jsonList) {
-				list.add(TaskRoadPassingCarRecordPassInfo.parseList(e));
+				list.add(TaskRoadSectionPassingCarRecordPassInfo.parseList(e));
 			}
 			return calculateDoubleCardTaskRoadAverageSpeed(length, list);
 		} else {
@@ -136,28 +136,28 @@ public class CalculateServiceImpl implements CalculateService {
 		}
 	}
 	
-	static Long calculateTaskRoadTrafficFlow(List<TaskRoadTrafficFlow> list) {
+	static Long calculateTaskRoadTrafficFlow(List<TaskRoadSectionTrafficFlow> list) {
 		// filter
-		TaskRoadTrafficFlow first = list.get(0);
+		TaskRoadSectionTrafficFlow first = list.get(0);
 		final int cardCount = first.getCardCount();
-		List<TaskRoadTrafficFlow> filtered = Lists.newArrayList();
-		for (TaskRoadTrafficFlow e : list) {
+		List<TaskRoadSectionTrafficFlow> filtered = Lists.newArrayList();
+		for (TaskRoadSectionTrafficFlow e : list) {
 			if (e.getCardCount() == cardCount) {
 				filtered.add(e);
 			}
 		}
 		// calculate
 		if (cardCount == 1) {
-			List<TaskRoadTrafficFlowPassInfo> infoList = Lists.newArrayList();
-			for (TaskRoadTrafficFlow e : filtered) {
-				List<TaskRoadTrafficFlowPassInfo> info = TaskRoadTrafficFlowPassInfo.parseList(e.getPassInfoJson());
+			List<TaskRoadSectionTrafficFlowPassInfo> infoList = Lists.newArrayList();
+			for (TaskRoadSectionTrafficFlow e : filtered) {
+				List<TaskRoadSectionTrafficFlowPassInfo> info = TaskRoadSectionTrafficFlowPassInfo.parseList(e.getPassInfoJson());
 				infoList.addAll(info);
 			}
 			return calculateSingleCardTaskRoadTrafficFlow(infoList);
 		} else if (cardCount == 2) {
-			List<TaskRoadTrafficFlowPassInfo> infoList = Lists.newArrayList();
-			for (TaskRoadTrafficFlow e : filtered) {
-				List<TaskRoadTrafficFlowPassInfo> info = TaskRoadTrafficFlowPassInfo.parseList(e.getPassInfoJson());
+			List<TaskRoadSectionTrafficFlowPassInfo> infoList = Lists.newArrayList();
+			for (TaskRoadSectionTrafficFlow e : filtered) {
+				List<TaskRoadSectionTrafficFlowPassInfo> info = TaskRoadSectionTrafficFlowPassInfo.parseList(e.getPassInfoJson());
 				infoList.addAll(info);
 			}
 			return calculateDoubleCardTaskRoadTrafficFlow(infoList);
@@ -171,13 +171,13 @@ public class CalculateServiceImpl implements CalculateService {
 	 * @param c
 	 * @return  speed in km/h
 	 */
-	public static Double calculateSingleCardTaskRoadAverageSpeed(Collection<TaskRoadPassingCarRecordPassInfo> c) {
+	public static Double calculateSingleCardTaskRoadAverageSpeed(Collection<TaskRoadSectionPassingCarRecordPassInfo> c) {
 		if (c.isEmpty()) {
 			return null;
 		}
 		
 		Double result = DOUBLE_ZERO;
-		for (TaskRoadPassingCarRecordPassInfo e : c) {
+		for (TaskRoadSectionPassingCarRecordPassInfo e : c) {
 			Double speed = new Double(e.getSpeed());
 			result += speed;
 		}
@@ -193,7 +193,7 @@ public class CalculateServiceImpl implements CalculateService {
 	 * @param c
 	 * @return  speed in km/h
 	 */
-	public static Double calculateDoubleCardTaskRoadAverageSpeed(Double length, Collection<List<TaskRoadPassingCarRecordPassInfo>> c) {
+	public static Double calculateDoubleCardTaskRoadAverageSpeed(Double length, Collection<List<TaskRoadSectionPassingCarRecordPassInfo>> c) {
 		logger.debug("road length(km): " + length);
 		if (c.isEmpty() || length.compareTo(DOUBLE_ZERO) <= 0) {
 			return null;
@@ -201,12 +201,12 @@ public class CalculateServiceImpl implements CalculateService {
 		
 		Double result = DOUBLE_ZERO;
 		int effectiveCount = 0;
-		for (List<TaskRoadPassingCarRecordPassInfo> e : c) {
+		for (List<TaskRoadSectionPassingCarRecordPassInfo> e : c) {
 			if (e.size() < 2) {
 				continue;
 			}
-			TaskRoadPassingCarRecordPassInfo one = e.get(0);
-			TaskRoadPassingCarRecordPassInfo another = e.get(1);
+			TaskRoadSectionPassingCarRecordPassInfo one = e.get(0);
+			TaskRoadSectionPassingCarRecordPassInfo another = e.get(1);
 			// time cost
 			long millisOne = one.getTime().getTime();
 			long millisAnother = another.getTime().getTime();
@@ -228,19 +228,19 @@ public class CalculateServiceImpl implements CalculateService {
 		return result;
 	}
 	
-	public static Long calculateSingleCardTaskRoadTrafficFlow(Collection<TaskRoadTrafficFlowPassInfo> c) {
+	public static Long calculateSingleCardTaskRoadTrafficFlow(Collection<TaskRoadSectionTrafficFlowPassInfo> c) {
 		if (c.isEmpty()) {
 			return null;
 		}
 		
 		long sum = 0;
-		for (TaskRoadTrafficFlowPassInfo e : c) {
+		for (TaskRoadSectionTrafficFlowPassInfo e : c) {
 			sum += e.getPassCarCount();
 		}
 		return sum;
 	}
 	
-	public static Long calculateDoubleCardTaskRoadTrafficFlow(Collection<TaskRoadTrafficFlowPassInfo> c) {
+	public static Long calculateDoubleCardTaskRoadTrafficFlow(Collection<TaskRoadSectionTrafficFlowPassInfo> c) {
 		Long result = calculateSingleCardTaskRoadTrafficFlow(c);
 		if (result == null) {
 			return result;

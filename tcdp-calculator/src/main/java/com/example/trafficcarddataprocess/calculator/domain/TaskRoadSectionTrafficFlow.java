@@ -1,10 +1,10 @@
 package com.example.trafficcarddataprocess.calculator.domain;
 
-public class TaskRoadTrafficFlow {
+public class TaskRoadSectionTrafficFlow {
 	
 	private Long id;
 	private Long taskId;
-	private Long roadId;
+	private Long roadSectionId;
 	private Integer cardCount;
 	private String passInfoJson;
 	private Integer status;
@@ -25,12 +25,12 @@ public class TaskRoadTrafficFlow {
 		this.taskId = taskId;
 	}
 
-	public Long getRoadId() {
-		return roadId;
+	public Long getRoadSectionId() {
+		return roadSectionId;
 	}
 
-	public void setRoadId(Long roadId) {
-		this.roadId = roadId;
+	public void setRoadSectionId(Long roadId) {
+		this.roadSectionId = roadId;
 	}
 
 	public Integer getCardCount() {

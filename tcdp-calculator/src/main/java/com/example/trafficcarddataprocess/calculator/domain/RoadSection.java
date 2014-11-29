@@ -1,6 +1,6 @@
 package com.example.trafficcarddataprocess.calculator.domain;
 
-public class Road {
+public class RoadSection {
 
 	private Long id;
 	private Integer cardCount;

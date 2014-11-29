@@ -5,17 +5,17 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.example.trafficcarddataprocess.calculator.domain.TaskRoadTrafficFlowPassInfo;
+import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionTrafficFlowPassInfo;
 
-public class TaskRoadTrafficFlowPassInfoTest {
+public class TaskRoadSectionTrafficFlowPassInfoTest {
 
 	@Test
 	public void testParseList() {
 		final String expectedDeviceNumber = "1";
 		final Integer expectedPassCarCount = 177;
 		String json = "[{\"sbbh\":\"1\", \"gcsl\":\"177\"}]";
-		List<TaskRoadTrafficFlowPassInfo> list = TaskRoadTrafficFlowPassInfo.parseList(json);
-		TaskRoadTrafficFlowPassInfo actual = list.get(0);
+		List<TaskRoadSectionTrafficFlowPassInfo> list = TaskRoadSectionTrafficFlowPassInfo.parseList(json);
+		TaskRoadSectionTrafficFlowPassInfo actual = list.get(0);
 		Assert.assertEquals(expectedDeviceNumber, actual.getDeviceNumber());
 		Assert.assertEquals(expectedPassCarCount, actual.getPassCarCount());
 	}

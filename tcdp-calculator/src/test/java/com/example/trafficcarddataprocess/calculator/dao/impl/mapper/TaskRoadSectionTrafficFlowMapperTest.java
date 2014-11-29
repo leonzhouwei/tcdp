@@ -8,21 +8,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.trafficcarddataprocess.calculator.App;
-import com.example.trafficcarddataprocess.calculator.domain.TaskRoadPassingCarRecord;
+import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionTrafficFlow;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)
-public class TaskRoadPassingCarRecordMapperTest {
+public class TaskRoadSectionTrafficFlowMapperTest {
 	
 	@Autowired
-	private TaskRoadPassingCarRecordMapper mapper;
+	private TaskRoadSectionTrafficFlowMapper mapper;
 
 	@Test
-	public void testSelectByTaskId() {
-		final Long taskId = 1L;
-		List<TaskRoadPassingCarRecord> result = mapper.selectByTaskId(taskId);
-		System.out.println(result.size());
+	public void testSelectAll() {
+		List<TaskRoadSectionTrafficFlow> result = mapper.selectAll();
+		for (TaskRoadSectionTrafficFlow e : result) {
+			String json = JSONObject.toJSONString(e);
+			System.out.println(json);
+		}
 	}
 
 }

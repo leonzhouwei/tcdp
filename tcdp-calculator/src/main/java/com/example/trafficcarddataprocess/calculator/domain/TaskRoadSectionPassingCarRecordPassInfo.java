@@ -6,7 +6,7 @@ import java.util.List;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 
-public class TaskRoadPassingCarRecordPassInfo {
+public class TaskRoadSectionPassingCarRecordPassInfo {
 
 	private static final String DEVICE_NUMBER_FIELD_NAME = "sbbh";
 	private static final String TIME_FIELD_NAME = "gcsj";
@@ -16,9 +16,9 @@ public class TaskRoadPassingCarRecordPassInfo {
 	private Date time;
 	private Double speed; // km/h
 	
-	public static List<TaskRoadPassingCarRecordPassInfo> parseList(String json) {
+	public static List<TaskRoadSectionPassingCarRecordPassInfo> parseList(String json) {
 		return JSONObject.parseArray(json,
-				TaskRoadPassingCarRecordPassInfo.class);
+				TaskRoadSectionPassingCarRecordPassInfo.class);
 	}
 
 	@JSONField(name = DEVICE_NUMBER_FIELD_NAME)

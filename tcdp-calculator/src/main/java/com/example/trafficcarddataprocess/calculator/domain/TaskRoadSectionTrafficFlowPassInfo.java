@@ -5,15 +5,15 @@ import java.util.List;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 
-public class TaskRoadTrafficFlowPassInfo {
+public class TaskRoadSectionTrafficFlowPassInfo {
 	private static final String DEVICE_NUMBER_FIELD_NAME = "sbbh";
 	private static final String PASSING_CAR_COUNT_FIELD_NAME = "gcsl";
 
 	private String deviceNumber;
 	private Integer passCarCount;
 	
-	public static List<TaskRoadTrafficFlowPassInfo> parseList(String json) {
-		return JSONObject.parseArray(json, TaskRoadTrafficFlowPassInfo.class);
+	public static List<TaskRoadSectionTrafficFlowPassInfo> parseList(String json) {
+		return JSONObject.parseArray(json, TaskRoadSectionTrafficFlowPassInfo.class);
 	}
 
 	@JSONField(name = DEVICE_NUMBER_FIELD_NAME)

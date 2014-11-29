@@ -6,22 +6,22 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.trafficcarddataprocess.calculator.dao.TaskRoadPassingCarRecordDao;
-import com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskRoadPassingCarRecordMapper;
-import com.example.trafficcarddataprocess.calculator.domain.TaskRoadPassingCarRecord;
+import com.example.trafficcarddataprocess.calculator.dao.TaskRoadSectionPassingCarRecordDao;
+import com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskRoadSectionPassingCarRecordMapper;
+import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionPassingCarRecord;
 import com.google.common.collect.Maps;
 
 @Component
-public class TaskRoadPassingCarRecordDaoImpl implements TaskRoadPassingCarRecordDao {
+public class TaskRoadSectionPassingCarRecordDaoImpl implements TaskRoadSectionPassingCarRecordDao {
 
 	private static final String TASK_ID = "taskId";
 	private static final String ROAD_ID = "roadId";
 	
 	@Autowired
-	private TaskRoadPassingCarRecordMapper mapper;
+	private TaskRoadSectionPassingCarRecordMapper mapper;
 	
 	@Override
-	public List<TaskRoadPassingCarRecord> findAllByTaskIdAndRoadId(long taskId,
+	public List<TaskRoadSectionPassingCarRecord> findAllByTaskIdAndRoadId(long taskId,
 			long roadId) {
 		Map<String, String> map = Maps.newHashMap();
 		map.put(TASK_ID, Long.toString(taskId));
@@ -30,7 +30,7 @@ public class TaskRoadPassingCarRecordDaoImpl implements TaskRoadPassingCarRecord
 	}
 	
 	@Override
-	public List<TaskRoadPassingCarRecord> findUndoneByTaskId(long taskId) {
+	public List<TaskRoadSectionPassingCarRecord> findUndoneByTaskId(long taskId) {
 		return mapper.selectUndoneByTaskId(taskId);
 	}
 
