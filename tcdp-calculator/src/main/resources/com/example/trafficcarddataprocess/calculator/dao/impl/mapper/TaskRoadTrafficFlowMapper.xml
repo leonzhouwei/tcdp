@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskRoadTrafficFlowMapper">
+
+	<resultMap id="defaultResultMap"
+		type="com.example.trafficcarddataprocess.calculator.domain.TaskRoadTrafficFlow">
+		<result property="id" column="id" />
+		<result property="taskId" column="task_id" />
+		<result property="roadId" column="road_id" />
+		<result property="cardCount" column="pass_count" />
+		<result property="passInfoJson" column="pass_info" />
+		<result property="status" column="status" />
+	</resultMap>
+
+	<select id="selectAll" resultMap="defaultResultMap">
+		SELECT * FROM jiaotong_pass_list
+	</select>
+</mapper>

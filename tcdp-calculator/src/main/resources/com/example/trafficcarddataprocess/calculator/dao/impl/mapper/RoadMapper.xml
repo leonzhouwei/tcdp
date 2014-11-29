@@ -8,7 +8,7 @@
         type="com.example.trafficcarddataprocess.calculator.domain.Road">
         <result property="id" column="id" />
         <result property="cardCount" column="kks" />
-        <result property="length" column="length" />
+        <result property="length" column="road_length" />
     </resultMap>
 
     <select id="selectRoad" parameterType="java.lang.Long" resultMap="roadResultMap">
