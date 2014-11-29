@@ -27,6 +27,31 @@
 					<li><button type="submit" class="btn btn-primary">计算</button></li>
 				</ul>
 			</form>
+			<table class="table table-striped table-bordered table-hover table-condensed">
+				<caption></caption>
+				<thead>
+					<tr>
+						<th>数据库记录 ID</th>
+						<th>任务 ID</th>
+						<th>路段 ID</th>
+						<th>平均速度 (km/h)</th>
+						<th>平均速度置信度</th>
+						<th>车流量</th>
+						<th>车流量置信度</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="result : ${results}">
+						<td th:text="${result.id}">...</td>
+						<td th:text="${result.taskId}">...</td>
+						<td th:text="${result.roadId}">...</td>
+						<td th:text="${result.averageSpeed}">...</td>
+						<td th:text="${result.averageSpeedConfidence}">...</td>
+						<td th:text="${result.trafficFlow}">...</td>
+						<td th:text="${result.trafficFlowConfidence}">...</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </body>
