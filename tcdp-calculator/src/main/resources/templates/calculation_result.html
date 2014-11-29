@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>卡口数据处理结果展示（只计算，不写入数据库）</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>卡口数据处理结果展示</title>
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
-    href="../../css/bootstrap.min.css" />
+	href="../../css/bootstrap.min.css" />
 </head>
 <body>
-    <div class="container">
-        <form th:action="@{/calculatation}" method="get">
-            <div>
-	            <span>
-		            <label>任务Id:</label>
-		            <input name="taskId" type="text">
-                    <label>路段Id:</label>
-                    <input name="road_id" type="text">
-                    <button type="submit">计算</button>
-	            </span>
-            </div>
-        </form>
-    </div>
+	<div class="container">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<a class="brand"
+					href="https://github.com/ultraq/thymeleaf-layout-dialect">
+					Thymeleaf - Layout </a>
+			</div>
+		</div>
+		<div>
+			<form th:action="@{/calculation}" method="post">
+				<ul>
+					<li><label>任务Id:</label></li>
+					<li><input name="taskId" type="text"></input></li>
+					<li><label>路段Id:</label></li>
+					<li><input name="roadId" type="text"></input></li>
+					<li><button type="submit" class="btn btn-primary">计算</button></li>
+				</ul>
+			</form>
+		</div>
+	</div>
 </body>
 </html>
