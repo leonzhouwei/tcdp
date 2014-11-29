@@ -23,5 +23,15 @@
 	<select id="selectTask" parameterType="java.lang.Long" resultMap="taskResultMap">
         SELECT * FROM jiaotong_task WHERE id = #{id}
     </select>
+    
+    <select id="selectFirstWaitingTask" resultMap="taskResultMap">
+        SELECT t.* 
+        FROM jiaotong_task t 
+        WHERE t.id = (
+            SELECT MIN(inner.id) 
+            FROM jiaotong_task inner 
+            WHERE inner.status1 = 1 AND inner.status2 = 0
+        )
+    </select>
 
 </mapper>

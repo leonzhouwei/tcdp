@@ -18,6 +18,7 @@ import com.example.trafficcarddataprocess.calculator.domain.TaskRoadPassingCarRe
 import com.example.trafficcarddataprocess.calculator.domain.TaskRoadTrafficFlow;
 import com.example.trafficcarddataprocess.calculator.domain.TaskRoadTrafficFlowPassInfo;
 import com.example.trafficcarddataprocess.calculator.service.CalculateService;
+import com.example.trafficcarddataprocess.calculator.service.RoadService;
 import com.google.common.collect.Lists;
 
 @Component
@@ -31,6 +32,27 @@ public class CalculateServiceImpl implements CalculateService {
 	private TaskRoadPassingCarRecordDao passCarDao;
 	@Autowired
 	private TaskRoadTrafficFlowDao trafficFlowDao;
+	@Autowired
+	private RoadService roadService;
+	
+	@Override
+	public List<Result> calculate(Task task) {
+		List<Result> ret = Lists.newArrayList();
+		final long taskId = task.getId();
+		// task and its related road sections
+		List<TaskRoadPassingCarRecord> list = passCarDao.findUndoneByTaskId(taskId);
+		if (list.isEmpty()) {
+			return ret;
+		}
+		for (TaskRoadPassingCarRecord e : list) {
+			// road section
+			long roadSectionId = e.getRoadId();
+			Road roadSection = roadService.findRoad(roadSectionId);
+			Result result = calculate(task, roadSection);
+			ret.add(result);
+		}
+		return ret;
+	}
 	
 	@Override
 	public Result calculate(Task task, Road road) {

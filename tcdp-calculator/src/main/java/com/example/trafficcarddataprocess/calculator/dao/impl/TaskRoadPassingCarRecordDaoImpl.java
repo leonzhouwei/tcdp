@@ -28,5 +28,10 @@ public class TaskRoadPassingCarRecordDaoImpl implements TaskRoadPassingCarRecord
 		map.put(ROAD_ID, Long.toString(roadId));
 		return mapper.selectByTaskIdAndRoadId(map);
 	}
+	
+	@Override
+	public List<TaskRoadPassingCarRecord> findUndoneByTaskId(long taskId) {
+		return mapper.selectUndoneByTaskId(taskId);
+	}
 
 }

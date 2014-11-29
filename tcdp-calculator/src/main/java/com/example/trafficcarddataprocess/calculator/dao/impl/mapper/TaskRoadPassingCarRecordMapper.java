@@ -12,5 +12,7 @@ public interface TaskRoadPassingCarRecordMapper {
 	public List<TaskRoadPassingCarRecord> selectByTaskId(Long taskId);
 	
 	public List<TaskRoadPassingCarRecord> selectAll();
+	
+	public List<TaskRoadPassingCarRecord> selectUndoneByTaskId(Long taskId);
 
 }

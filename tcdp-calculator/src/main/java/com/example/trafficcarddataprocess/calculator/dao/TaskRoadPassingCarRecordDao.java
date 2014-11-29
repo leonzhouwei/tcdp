@@ -8,4 +8,6 @@ public interface TaskRoadPassingCarRecordDao {
 	
 	public List<TaskRoadPassingCarRecord> findAllByTaskIdAndRoadId(long taskId, long roadId);
 
+	public List<TaskRoadPassingCarRecord> findUndoneByTaskId(long taskId);
+
 }

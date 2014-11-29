@@ -34,5 +34,12 @@
         FROM jiaotong_car_list 
         WHERE task_id = #{taskId} AND road_id = #{roadId}
     </select>
+    
+    <select id="selectUndoneByTaskId" parameterType="java.lang.Long"
+        resultMap="resultMap">
+        SELECT <include refid="defaultColumns" /> 
+        FROM jiaotong_car_list 
+        WHERE task_id = #{taskId} AND status = 0
+    </select>
 
 </mapper>
