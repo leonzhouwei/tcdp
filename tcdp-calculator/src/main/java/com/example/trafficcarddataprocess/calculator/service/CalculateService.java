@@ -12,5 +12,13 @@ public interface CalculateService {
 	 * @return speed in km/h
 	 */
 	public Double calculateAverageSpeed(Task task, Road road);
+	
+	/**
+	 * 
+	 * @param task
+	 * @param road
+	 * @return  
+	 */
+	public Long calculateTrafficFlow(Task task, Road road);
 
 }

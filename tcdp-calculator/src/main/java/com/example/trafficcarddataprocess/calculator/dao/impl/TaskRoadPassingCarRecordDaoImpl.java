@@ -21,7 +21,7 @@ public class TaskRoadPassingCarRecordDaoImpl implements TaskRoadPassingCarRecord
 	private TaskRoadPassingCarRecordMapper mapper;
 	
 	@Override
-	public List<TaskRoadPassingCarRecord> findAllByTaskAndRoad(long taskId,
+	public List<TaskRoadPassingCarRecord> findAllByTaskIdAndRoadId(long taskId,
 			long roadId) {
 		Map<String, String> map = Maps.newHashMap();
 		map.put(TASK_ID, Long.toString(taskId));

@@ -32,7 +32,7 @@ public class CalculateServiceImpl implements CalculateService {
 	public Double calculateAverageSpeed(Task task, Road road) {
 		long taskId = task.getId();
 		long roadId = road.getId();
-		List<TaskRoadPassingCarRecord> result = dao.findAllByTaskAndRoad(
+		List<TaskRoadPassingCarRecord> result = dao.findAllByTaskIdAndRoadId(
 				taskId, roadId);
 		if (result.isEmpty()) {
 			return null;
@@ -40,6 +40,11 @@ public class CalculateServiceImpl implements CalculateService {
 
 		Double length = new Double(road.getLength());
 		return calculateAverageSpeed(result, length);
+	}
+	
+	public Long calculateTrafficFlow(Task task, Road road) {
+		// TODO
+		return null;
 	}
 	
 	/**
