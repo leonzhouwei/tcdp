@@ -1,13 +1,10 @@
 package com.example.trafficcarddataprocess.calculator.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.example.trafficcarddataprocess.calculator.dao.TaskRoadSectionPassingCarRecordDao;
 import com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskMapper;
-import com.example.trafficcarddataprocess.calculator.domain.Result;
 import com.example.trafficcarddataprocess.calculator.domain.Task;
 import com.example.trafficcarddataprocess.calculator.service.CalculateService;
 import com.example.trafficcarddataprocess.calculator.service.TaskService;
@@ -40,7 +37,7 @@ public class TaskServiceImpl implements TaskService {
 			return;
 		}
 		// TODO
-		List<Result> results = calucateService.calculate(task);
+		// List<Result> results = calucateService.calculate(task);
 	}
 
 }
