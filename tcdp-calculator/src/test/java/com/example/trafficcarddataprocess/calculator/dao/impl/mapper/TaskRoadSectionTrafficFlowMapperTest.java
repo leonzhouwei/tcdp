@@ -44,6 +44,7 @@ public class TaskRoadSectionTrafficFlowMapperTest {
 			String json = JSONObject.toJSONString(e);
 			System.out.println(json);
 		}
+		System.out.println("testSelectByTaskIdAndRoadSectionId(): " + result.size());
 	}
 
 }
