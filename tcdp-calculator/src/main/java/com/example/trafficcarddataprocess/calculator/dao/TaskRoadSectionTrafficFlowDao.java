@@ -6,6 +6,6 @@ import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionTraff
 
 public interface TaskRoadSectionTrafficFlowDao {
 	
-	public List<TaskRoadSectionTrafficFlow> findAllByTaskIdAndRoadId(long taskId, long roadId);
+	public List<TaskRoadSectionTrafficFlow> findAllByTaskIdAndRoadSectionId(long taskId, long roadSectionId);
 
 }

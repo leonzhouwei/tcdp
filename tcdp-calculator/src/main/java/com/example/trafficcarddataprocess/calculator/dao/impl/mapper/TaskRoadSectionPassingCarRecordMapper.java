@@ -7,7 +7,7 @@ import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionPassi
 
 public interface TaskRoadSectionPassingCarRecordMapper {
 	
-	public List<TaskRoadSectionPassingCarRecord> selectByTaskIdAndRoadId(Map<String, String> map);
+	public List<TaskRoadSectionPassingCarRecord> selectByTaskIdAndRoadSectionId(Map<String, String> map);
 	
 	public List<TaskRoadSectionPassingCarRecord> selectByTaskId(Long taskId);
 	

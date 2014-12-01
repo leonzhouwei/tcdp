@@ -8,7 +8,7 @@
 		type="com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionTrafficFlow">
 		<result property="id" column="id" />
 		<result property="taskId" column="task_id" />
-		<result property="roadId" column="road_id" />
+		<result property="roadSectionId" column="road_id" />
 		<result property="cardCount" column="pass_count" />
 		<result property="passInfoJson" column="pass_info" />
 		<result property="status" column="status" />
@@ -18,8 +18,8 @@
 		SELECT * FROM jiaotong_pass_list
 	</select>
 	
-	<select id="selectByTaskIdAndRoadId" resultMap="defaultResultMap">
+	<select id="selectByTaskIdAndRoadSectionId" resultMap="defaultResultMap">
         SELECT * FROM jiaotong_pass_list
-        WHERE task_id = #{taskId} AND road_id = #{road_id}
+        WHERE task_id = #{taskId} AND road_id = #{roadSectionId}
     </select>
 </mapper>

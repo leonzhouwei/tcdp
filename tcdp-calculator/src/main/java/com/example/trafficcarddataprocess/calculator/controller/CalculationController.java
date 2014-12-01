@@ -22,22 +22,22 @@ public class CalculationController {
 	private static final Logger logger = LoggerFactory.getLogger(CalculationController.class);
 	
 	@RequestMapping(value="/calculation", method=RequestMethod.POST)
-    public ModelAndView echo(@RequestParam("taskId") String taskIdParam, @RequestParam("roadId") String roadIdParam) {  
+    public ModelAndView echo(@RequestParam("taskId") String taskIdParam, @RequestParam("roadSectionId") String roadSectionIdParam) {  
 		logger.debug("task id: " + taskIdParam);
-		logger.debug("road id: " + roadIdParam);
+		logger.debug("road section id: " + roadSectionIdParam);
 		List<Result> list = Lists.newArrayList();
 		for (int i = 1; i < 11; ++i) {
 			Result e = new Result();
 			long id = i;
 			long taskId = i;
-			long roadId = i;
+			long roadSectionId = i;
 			double speed = i;
 			double speedConfi = i;
 			long flow = i;
 			double flowConfi = i;
 			e.setId(id);
 			e.setTaskId(taskId);
-			e.setRoadSectionId(roadId);
+			e.setRoadSectionId(roadSectionId);
 			e.setAverageSpeed(speed);
 			e.setAverageSpeedConfidence(speedConfi);
 			e.setTrafficFlow(flow);
@@ -50,23 +50,23 @@ public class CalculationController {
         return mav;  
     }
 	
-	@RequestMapping(value="/calculations/tasks/{taskId}/roads/{roadId}", method=RequestMethod.GET)
-    public ModelAndView get(@PathVariable("taskId") String taskIdParam, @PathVariable("roadId") String roadIdParam) {  
+	@RequestMapping(value="/calculations/tasks/{taskId}/roads/{roadSectionId}", method=RequestMethod.GET)
+    public ModelAndView get(@PathVariable("taskId") String taskIdParam, @PathVariable("roadSectionId") String roadSectionIdParam) {  
 		logger.debug("task id: " + taskIdParam);
-		logger.debug("road id: " + roadIdParam);
+		logger.debug("road id: " + roadSectionIdParam);
 		List<Result> list = Lists.newArrayList();
 		for (int i = 1; i < 11; ++i) {
 			Result e = new Result();
 			long id = i;
 			long taskId = i;
-			long roadId = i;
+			long roadSectionId = i;
 			double speed = i;
 			double speedConfi = i;
 			long flow = i;
 			double flowConfi = i;
 			e.setId(id);
 			e.setTaskId(taskId);
-			e.setRoadSectionId(roadId);
+			e.setRoadSectionId(roadSectionId);
 			e.setAverageSpeed(speed);
 			e.setAverageSpeedConfidence(speedConfi);
 			e.setTrafficFlow(flow);

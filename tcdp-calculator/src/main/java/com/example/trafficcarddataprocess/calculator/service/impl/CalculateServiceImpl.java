@@ -69,25 +69,25 @@ public class CalculateServiceImpl implements CalculateService {
 	}
 
 	@Override
-	public Double calculateAverageSpeed(Task task, RoadSection road) {
+	public Double calculateAverageSpeed(Task task, RoadSection roadSection) {
 		long taskId = task.getId();
-		long roadId = road.getId();
-		List<TaskRoadSectionPassingCarRecord> result = passCarDao.findAllByTaskIdAndRoadId(
-				taskId, roadId);
+		long roadSectionId = roadSection.getId();
+		List<TaskRoadSectionPassingCarRecord> result = passCarDao.findAllByTaskIdAndRoadSectionId(
+				taskId, roadSectionId);
 		if (result.isEmpty()) {
 			return null;
 		}
 
-		Double length = new Double(road.getLength());
+		Double length = new Double(roadSection.getLength());
 		double ret = calculateAverageSpeed(result, length);
 		return ret;
 	}
 	
 	@Override
-	public Long calculateTrafficFlow(Task task, RoadSection road) {
+	public Long calculateTrafficFlow(Task task, RoadSection roadSection) {
 		long taskId = task.getId();
-		long roadId = road.getId();
-		List<TaskRoadSectionTrafficFlow> result = trafficFlowDao.findAllByTaskIdAndRoadId(taskId, roadId);
+		long roadSectionId = roadSection.getId();
+		List<TaskRoadSectionTrafficFlow> result = trafficFlowDao.findAllByTaskIdAndRoadSectionId(taskId, roadSectionId);
 		if (result.isEmpty()) {
 			return null;
 		}

@@ -71,8 +71,8 @@ public class Result {
 		return roadSectionId;
 	}
 
-	public void setRoadSectionId(Long roadId) {
-		this.roadSectionId = roadId;
+	public void setRoadSectionId(Long roadSectionId) {
+		this.roadSectionId = roadSectionId;
 	}
 
 }

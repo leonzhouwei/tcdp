@@ -12,7 +12,7 @@
 		type="com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionPassingCarRecord">
 		<result property="id" column="id" />
 		<result property="taskId" column="task_id" />
-		<result property="roadId" column="road_id" />
+		<result property="roadSectionId" column="road_id" />
 		<result property="carNumber" column="car_no" />
 		<result property="passInfoJson" column="pass_info" />
 		<result property="cardCount" column="pass_count" />
@@ -28,11 +28,11 @@
 		SELECT * FROM jiaotong_car_list WHERE task_id = #{taskId}
 	</select>
 	
-	<select id="selectByTaskIdAndRoadId" parameterType="map"
+	<select id="selectByTaskIdAndRoadSectionId" parameterType="map"
         resultMap="resultMap">
         SELECT <include refid="defaultColumns" /> 
         FROM jiaotong_car_list 
-        WHERE task_id = #{taskId} AND road_id = #{roadId}
+        WHERE task_id = #{taskId} AND road_id = #{roadSectionId}
     </select>
     
     <select id="selectUndoneByTaskId" parameterType="java.lang.Long"

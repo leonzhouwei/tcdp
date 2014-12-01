@@ -129,7 +129,7 @@ public class CalculateServiceImplAlgorithmTest {
 	@Test
 	public void testCalculateAverageSpeedTaskRoad_4() {
 		final long taskId = 1L;
-		final long roadId = 1L;
+		final long roadSectionId = 1L;
 		final int cardCount = 2;
 		StringBuilder sb1 = new StringBuilder();
 		sb1.append("[");
@@ -140,7 +140,7 @@ public class CalculateServiceImplAlgorithmTest {
 		TaskRoadSectionPassingCarRecord instance1 = new TaskRoadSectionPassingCarRecord();
 		instance1.setId(1L);
 		instance1.setTaskId(taskId);
-		instance1.setRoadSectionId(roadId);
+		instance1.setRoadSectionId(roadSectionId);
 		instance1.setCarNumber("test_car_num_1");
 		instance1.setCardCount(cardCount);
 		instance1.setPassInfoJson(sb1.toString());
@@ -153,7 +153,7 @@ public class CalculateServiceImplAlgorithmTest {
 		TaskRoadSectionPassingCarRecord instance2 = new TaskRoadSectionPassingCarRecord();
 		instance2.setId(1L);
 		instance2.setTaskId(taskId);
-		instance2.setRoadSectionId(roadId);
+		instance2.setRoadSectionId(roadSectionId);
 		instance2.setCarNumber("test_car_num_1");
 		instance2.setCardCount(cardCount);
 		instance2.setPassInfoJson(sb2.toString());
@@ -170,13 +170,13 @@ public class CalculateServiceImplAlgorithmTest {
 	@Test
 	public void testCalculateTaskRoadTrafficFlow_1() {
 		final long taskId = 1L;
-		final long roadId = 1L;
+		final long roadSectionId = 1L;
 		final int cardCount = 1;
 		final String json = "[{\"sbbh\":\"1\", \"gcsl\":\"1\"}]";
 		TaskRoadSectionTrafficFlow instance = new TaskRoadSectionTrafficFlow();
 		instance.setId(1L);
 		instance.setTaskId(taskId);
-		instance.setRoadSectionId(roadId);
+		instance.setRoadSectionId(roadSectionId);
 		instance.setCardCount(cardCount);
 		instance.setPassInfoJson(json);
 		List<TaskRoadSectionTrafficFlow> list = Lists.newArrayList(instance);
@@ -191,13 +191,13 @@ public class CalculateServiceImplAlgorithmTest {
 	@Test
 	public void testCalculateTaskRoadTrafficFlow_2() {
 		final long taskId = 1L;
-		final long roadId = 1L;
+		final long roadSectionId = 1L;
 		final int cardCount = 1;
 		final String json = "[{\"sbbh\":\"1\", \"gcsl\":\"2\"}]";
 		TaskRoadSectionTrafficFlow instance = new TaskRoadSectionTrafficFlow();
 		instance.setId(1L);
 		instance.setTaskId(taskId);
-		instance.setRoadSectionId(roadId);
+		instance.setRoadSectionId(roadSectionId);
 		instance.setCardCount(cardCount);
 		instance.setPassInfoJson(json);
 		List<TaskRoadSectionTrafficFlow> list = Lists.newArrayList(instance);
@@ -212,7 +212,7 @@ public class CalculateServiceImplAlgorithmTest {
 	@Test
 	public void testCalculateTaskRoadTrafficFlow_3() {
 		final long taskId = 1L;
-		final long roadId = 1L;
+		final long roadSectionId = 1L;
 		final int cardCount = 2;
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
@@ -224,7 +224,7 @@ public class CalculateServiceImplAlgorithmTest {
 		TaskRoadSectionTrafficFlow instance = new TaskRoadSectionTrafficFlow();
 		instance.setId(1L);
 		instance.setTaskId(taskId);
-		instance.setRoadSectionId(roadId);
+		instance.setRoadSectionId(roadSectionId);
 		instance.setCardCount(cardCount);
 		instance.setPassInfoJson(json);
 		List<TaskRoadSectionTrafficFlow> list = Lists.newArrayList(instance);
@@ -239,7 +239,7 @@ public class CalculateServiceImplAlgorithmTest {
 	@Test
 	public void testCalculateTaskRoadTrafficFlow_4() {
 		final long taskId = 1L;
-		final long roadId = 1L;
+		final long roadSectionId = 1L;
 		final int cardCount = 2;
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
@@ -251,7 +251,7 @@ public class CalculateServiceImplAlgorithmTest {
 		TaskRoadSectionTrafficFlow instance = new TaskRoadSectionTrafficFlow();
 		instance.setId(1L);
 		instance.setTaskId(taskId);
-		instance.setRoadSectionId(roadId);
+		instance.setRoadSectionId(roadSectionId);
 		instance.setCardCount(cardCount);
 		instance.setPassInfoJson(json);
 		List<TaskRoadSectionTrafficFlow> list = Lists.newArrayList(instance);
@@ -266,7 +266,7 @@ public class CalculateServiceImplAlgorithmTest {
 	@Test
 	public void testCalculateTaskRoadTrafficFlow_5() {
 		final long taskId = 1L;
-		final long roadId = 1L;
+		final long roadSectionId = 1L;
 		final int cardCount = 2;
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
@@ -278,7 +278,7 @@ public class CalculateServiceImplAlgorithmTest {
 		TaskRoadSectionTrafficFlow instance = new TaskRoadSectionTrafficFlow();
 		instance.setId(1L);
 		instance.setTaskId(taskId);
-		instance.setRoadSectionId(roadId);
+		instance.setRoadSectionId(roadSectionId);
 		instance.setCardCount(cardCount);
 		instance.setPassInfoJson(json);
 		List<TaskRoadSectionTrafficFlow> list = Lists.newArrayList(instance);

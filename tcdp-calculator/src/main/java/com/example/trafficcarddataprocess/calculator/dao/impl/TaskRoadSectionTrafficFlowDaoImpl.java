@@ -15,17 +15,17 @@ import com.google.common.collect.Maps;
 public class TaskRoadSectionTrafficFlowDaoImpl implements TaskRoadSectionTrafficFlowDao {
 	
 	private static final String TASK_ID = "taskId";
-	private static final String ROAD_ID = "roadId";
+	private static final String ROAD_SECTION_ID = "roadSectionId";
 	
 	@Autowired
 	private TaskRoadSectionTrafficFlowMapper mapper;
 
 	@Override
-	public List<TaskRoadSectionTrafficFlow> findAllByTaskIdAndRoadId(long taskId,
-			long roadId) {
+	public List<TaskRoadSectionTrafficFlow> findAllByTaskIdAndRoadSectionId(long taskId,
+			long roadSectionId) {
 		Map<String, String> map = Maps.newHashMap();
 		map.put(TASK_ID, Long.toString(taskId));
-		map.put(ROAD_ID, Long.toString(roadId));
+		map.put(ROAD_SECTION_ID, Long.toString(roadSectionId));
 		return mapper.selectByTaskIdAndRoadId(map);
 	}
 

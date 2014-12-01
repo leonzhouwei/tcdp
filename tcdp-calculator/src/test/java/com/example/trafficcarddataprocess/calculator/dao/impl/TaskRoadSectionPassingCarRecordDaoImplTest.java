@@ -21,8 +21,8 @@ public class TaskRoadSectionPassingCarRecordDaoImplTest {
 	@Test
 	public void testFindAllByTaskAndRoad() {
 		final long taskId = 1L;
-		final long roadId = 1L;
-		List<TaskRoadSectionPassingCarRecord> result = dao.findAllByTaskIdAndRoadId(taskId, roadId);
+		final long roadSectionId = 1L;
+		List<TaskRoadSectionPassingCarRecord> result = dao.findAllByTaskIdAndRoadSectionId(taskId, roadSectionId);
 		System.out.println(result.size());
 	}
 

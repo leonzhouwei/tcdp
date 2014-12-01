@@ -15,18 +15,18 @@ import com.google.common.collect.Maps;
 public class TaskRoadSectionPassingCarRecordDaoImpl implements TaskRoadSectionPassingCarRecordDao {
 
 	private static final String TASK_ID = "taskId";
-	private static final String ROAD_ID = "roadId";
+	private static final String ROAD_SECTION_ID = "roadSectionId";
 	
 	@Autowired
 	private TaskRoadSectionPassingCarRecordMapper mapper;
 	
 	@Override
-	public List<TaskRoadSectionPassingCarRecord> findAllByTaskIdAndRoadId(long taskId,
-			long roadId) {
+	public List<TaskRoadSectionPassingCarRecord> findAllByTaskIdAndRoadSectionId(long taskId,
+			long roadSectionId) {
 		Map<String, String> map = Maps.newHashMap();
 		map.put(TASK_ID, Long.toString(taskId));
-		map.put(ROAD_ID, Long.toString(roadId));
-		return mapper.selectByTaskIdAndRoadId(map);
+		map.put(ROAD_SECTION_ID, Long.toString(roadSectionId));
+		return mapper.selectByTaskIdAndRoadSectionId(map);
 	}
 	
 	@Override
