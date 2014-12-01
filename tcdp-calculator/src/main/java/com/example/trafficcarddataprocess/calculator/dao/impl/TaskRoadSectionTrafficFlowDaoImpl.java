@@ -14,9 +14,6 @@ import com.google.common.collect.Maps;
 @Component
 public class TaskRoadSectionTrafficFlowDaoImpl implements TaskRoadSectionTrafficFlowDao {
 	
-	public static final String TASK_ID = "taskId";
-	public static final String ROAD_SECTION_ID = "roadSectionId";
-	
 	@Autowired
 	private TaskRoadSectionTrafficFlowMapper mapper;
 
@@ -24,8 +21,8 @@ public class TaskRoadSectionTrafficFlowDaoImpl implements TaskRoadSectionTraffic
 	public List<TaskRoadSectionTrafficFlow> findAllByTaskIdAndRoadSectionId(long taskId,
 			long roadSectionId) {
 		Map<String, String> map = Maps.newHashMap();
-		map.put(TASK_ID, Long.toString(taskId));
-		map.put(ROAD_SECTION_ID, Long.toString(roadSectionId));
+		map.put(TaskRoadSectionTrafficFlowMapper.TASK_ID, Long.toString(taskId));
+		map.put(TaskRoadSectionTrafficFlowMapper.ROAD_SECTION_ID, Long.toString(roadSectionId));
 		return mapper.selectByTaskIdAndRoadSectionId(map);
 	}
 
