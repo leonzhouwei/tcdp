@@ -9,7 +9,7 @@ public interface TaskRoadSectionTrafficFlowMapper {
 
 	public List<TaskRoadSectionTrafficFlow> selectAll();
 
-	public List<TaskRoadSectionTrafficFlow> selectByTaskIdAndRoadId(
+	public List<TaskRoadSectionTrafficFlow> selectByTaskIdAndRoadSectionId(
 			Map<String, String> map);
 	
 }

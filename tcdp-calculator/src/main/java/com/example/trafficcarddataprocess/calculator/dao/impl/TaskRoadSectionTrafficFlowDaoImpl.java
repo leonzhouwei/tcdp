@@ -26,7 +26,7 @@ public class TaskRoadSectionTrafficFlowDaoImpl implements TaskRoadSectionTraffic
 		Map<String, String> map = Maps.newHashMap();
 		map.put(TASK_ID, Long.toString(taskId));
 		map.put(ROAD_SECTION_ID, Long.toString(roadSectionId));
-		return mapper.selectByTaskIdAndRoadId(map);
+		return mapper.selectByTaskIdAndRoadSectionId(map);
 	}
 
 }
