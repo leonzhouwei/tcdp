@@ -21,7 +21,7 @@ public class CalculateServiceImplTest {
 	@Autowired
 	private TaskServiceImpl taskService;
 	@Autowired
-	private RoadSectionServiceImpl roadService;
+	private RoadSectionServiceImpl roadSectionService;
 	@Autowired
 	private CalculateServiceImpl calculateService;
 
@@ -29,7 +29,7 @@ public class CalculateServiceImplTest {
 		final long taskId = 39L;
 		final long roadSectionId = 42595701381L;
 		Task task = taskService.findTask(taskId);
-		RoadSection road = roadService.findRoadSection(roadSectionId);
+		RoadSection road = roadSectionService.findRoadSection(roadSectionId);
 		System.out.println(road.getLength());
 		Double result = calculateService.calculateAverageSpeed(task, road);
 		System.out.println(result);
@@ -39,15 +39,13 @@ public class CalculateServiceImplTest {
 		final long taskId = 39L;
 		final long roadSectionId = 42595701382L;
 		Task task = taskService.findTask(taskId);
-		RoadSection road = roadService.findRoadSection(roadSectionId);
+		RoadSection road = roadSectionService.findRoadSection(roadSectionId);
 		System.out.println(road.getLength());
 		Double result = calculateService.calculateAverageSpeed(task, road);
 		System.out.println(result);
 	}
 
-	
-	@Test
-	public void testCalculate() {
+	public void testCalculate_1() {
 		final long taskId = 39L;
 		Task task = taskService.findTask(taskId);
 		List<Result> results = calculateService.calculate(task);
@@ -56,4 +54,15 @@ public class CalculateServiceImplTest {
 			System.out.println(json);
 		}
 	}
+	
+	@Test
+	public void testCalculate_2() {
+		final long taskId = 39L;
+		final long roadSectionId = 42595701381L;
+		Task task = taskService.findTask(taskId);
+		RoadSection roadSection = roadSectionService.findRoadSection(roadSectionId);
+		Result result = calculateService.calculate(task, roadSection);
+		System.out.println(JSONObject.toJSONString(result));
+	}
+	
 }

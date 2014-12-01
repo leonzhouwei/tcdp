@@ -17,7 +17,7 @@
 	</resultMap>
 
 	<select id="selectAllTasks" resultMap="taskResultMap">
-		SELECT * FROM jiaotong_task
+		SELECT * FROM jiaotong_task ORDER BY id
 	</select>
 	
 	<select id="selectTask" parameterType="java.lang.Long" resultMap="taskResultMap">

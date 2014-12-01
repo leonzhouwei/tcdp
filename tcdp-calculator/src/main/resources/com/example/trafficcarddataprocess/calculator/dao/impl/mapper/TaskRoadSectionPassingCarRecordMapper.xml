@@ -20,12 +20,12 @@
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">
-		SELECT * FROM jiaotong_car_list
+		SELECT * FROM jiaotong_car_list ORDER BY id
 	</select>
 
 	<select id="selectByTaskId" parameterType="java.lang.Long"
 		resultMap="resultMap">
-		SELECT * FROM jiaotong_car_list WHERE task_id = #{taskId}
+		SELECT * FROM jiaotong_car_list WHERE task_id = #{taskId} ORDER BY road_id
 	</select>
 	
 	<select id="selectByTaskIdAndRoadSectionId" parameterType="map"
@@ -33,6 +33,7 @@
         SELECT <include refid="defaultColumns" /> 
         FROM jiaotong_car_list 
         WHERE task_id = #{taskId} AND road_id = #{roadSectionId}
+        ORDER BY road_id
     </select>
     
     <select id="selectUndoneByTaskId" parameterType="java.lang.Long"
@@ -40,6 +41,7 @@
         SELECT <include refid="defaultColumns" /> 
         FROM jiaotong_car_list 
         WHERE task_id = #{taskId} AND status = 0
+        ORDER BY road_id
     </select>
 
 </mapper>

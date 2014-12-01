@@ -2,6 +2,7 @@ package com.example.trafficcarddataprocess.calculator.service.impl;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionTraff
 import com.example.trafficcarddataprocess.calculator.service.CalculateService;
 import com.example.trafficcarddataprocess.calculator.service.RoadSectionService;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 @Component
 public class CalculateServiceImpl implements CalculateService {
@@ -44,9 +46,15 @@ public class CalculateServiceImpl implements CalculateService {
 		if (list.isEmpty()) {
 			return ret;
 		}
+		Set<Long> roadSectionIds = Sets.newHashSet();
 		for (TaskRoadSectionPassingCarRecord e : list) {
 			// road section
-			long roadSectionId = e.getRoadSectionId();
+			Long roadSectionId = e.getRoadSectionId();
+			if (roadSectionIds.contains(roadSectionId)) {
+				continue;
+			} else {
+				roadSectionIds.add(roadSectionId);
+			}
 			RoadSection roadSection = roadService.findRoadSection(roadSectionId);
 			Result result = calculate(task, roadSection);
 			ret.add(result);
@@ -55,13 +63,13 @@ public class CalculateServiceImpl implements CalculateService {
 	}
 	
 	@Override
-	public Result calculate(Task task, RoadSection road) {
-		double averageSpeed = calculateAverageSpeed(task, road);
-		long trafficFlow = calculateTrafficFlow(task, road);
+	public Result calculate(Task task, RoadSection roadSection) {
+		double averageSpeed = calculateAverageSpeed(task, roadSection);
+		long trafficFlow = calculateTrafficFlow(task, roadSection);
 		Result result = new Result();
 		result.setId(-1L);
 		result.setTaskId(task.getId());
-		result.setRoadSectionId(road.getId());
+		result.setRoadSectionId(roadSection.getId());
 		result.setAverageSpeed(averageSpeed);
 		result.setTrafficFlow(trafficFlow);
 		
