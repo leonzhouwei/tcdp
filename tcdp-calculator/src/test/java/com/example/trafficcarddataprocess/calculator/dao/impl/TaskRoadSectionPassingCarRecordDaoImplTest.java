@@ -19,11 +19,18 @@ public class TaskRoadSectionPassingCarRecordDaoImplTest {
 	private TaskRoadSectionPassingCarRecordDaoImpl dao;
 
 	@Test
-	public void testFindAllByTaskAndRoad() {
-		final long taskId = 1L;
-		final long roadSectionId = 1L;
+	public void testFindByTaskId() {
+		final long taskId = 39L;
+		List<TaskRoadSectionPassingCarRecord> result = dao.findByTaskId(taskId);
+		System.out.println("testFindByTaskId(): " + result.size());
+	}
+	
+	@Test
+	public void testFindByTaskIdAndRoadSectionId() {
+		final long taskId = 39L;
+		final long roadSectionId = 42595700560L;
 		List<TaskRoadSectionPassingCarRecord> result = dao.findByTaskIdAndRoadSectionId(taskId, roadSectionId);
-		System.out.println(result.size());
+		System.out.println("testFindByTaskIdAndRoadSectionId(): " + result.size());
 	}
 
 }
