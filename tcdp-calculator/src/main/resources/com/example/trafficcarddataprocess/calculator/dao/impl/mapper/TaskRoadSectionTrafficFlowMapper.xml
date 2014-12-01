@@ -18,8 +18,13 @@
 		SELECT * FROM jiaotong_pass_list
 	</select>
 	
-	<select id="selectByTaskIdAndRoadSectionId" resultMap="defaultResultMap">
+	<select id="selectByTaskIdAndRoadSectionId" parameterType="map" resultMap="defaultResultMap">
         SELECT * FROM jiaotong_pass_list
         WHERE task_id = #{taskId} AND road_id = #{roadSectionId}
+    </select>
+    
+    <select id="selectByTaskId" parameterType="long" resultMap="defaultResultMap">
+        SELECT * FROM jiaotong_pass_list
+        WHERE task_id = #{taskId}
     </select>
 </mapper>

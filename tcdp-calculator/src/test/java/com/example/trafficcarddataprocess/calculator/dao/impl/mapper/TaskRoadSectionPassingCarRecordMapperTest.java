@@ -23,15 +23,15 @@ public class TaskRoadSectionPassingCarRecordMapperTest {
 
 	@Test
 	public void testSelectByTaskId() {
-		final Long taskId = 1L;
+		final Long taskId = 39L;
 		List<TaskRoadSectionPassingCarRecord> result = mapper.selectByTaskId(taskId);
-		System.out.println(result.size());
+		System.out.println("testSelectByTaskId(): " + result.size());
 	}
 	
 	@Test
 	public void testSelectByTaskIdAndRoadSectionId() {
-		Long taskId = 39L;
-		Long roadSectionId = 42595700560L;
+		final Long taskId = 39L;
+		final Long roadSectionId = 42595700560L;
 		Map<String, String> map = Maps.newHashMap();
 		map.put(TaskRoadSectionPassingCarRecordMapper.TASK_ID, taskId.toString());
 		map.put(TaskRoadSectionPassingCarRecordMapper.ROAD_SECTION_ID,

@@ -32,8 +32,8 @@ public class TaskRoadSectionTrafficFlowMapperTest {
 
 	@Test
 	public void testSelectByTaskIdAndRoadSectionId() {
-		Long taskId = 39L;
-		Long roadSectionId = 42595700548L;
+		final Long taskId = 39L;
+		final Long roadSectionId = 42595700548L;
 		Map<String, String> map = Maps.newHashMap();
 		map.put(TaskRoadSectionTrafficFlowMapper.TASK_ID, taskId.toString());
 		map.put(TaskRoadSectionTrafficFlowMapper.ROAD_SECTION_ID,
@@ -44,7 +44,19 @@ public class TaskRoadSectionTrafficFlowMapperTest {
 			String json = JSONObject.toJSONString(e);
 			System.out.println(json);
 		}
-		System.out.println("testSelectByTaskIdAndRoadSectionId(): " + result.size());
+		System.out.println("testSelectByTaskIdAndRoadSectionId(): "
+				+ result.size());
+	}
+
+	@Test
+	public void testSelectByTaskId() {
+		final Long taskId = 39L;
+		List<TaskRoadSectionTrafficFlow> result = mapper.selectByTaskId(taskId);
+		for (TaskRoadSectionTrafficFlow e : result) {
+			String json = JSONObject.toJSONString(e);
+			System.out.println(json);
+		}
+		System.out.println("testSelectByTaskId(): " + result.size());
 	}
 
 }
