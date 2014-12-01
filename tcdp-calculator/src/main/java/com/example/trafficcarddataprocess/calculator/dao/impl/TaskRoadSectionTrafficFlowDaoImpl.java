@@ -18,12 +18,17 @@ public class TaskRoadSectionTrafficFlowDaoImpl implements TaskRoadSectionTraffic
 	private TaskRoadSectionTrafficFlowMapper mapper;
 
 	@Override
-	public List<TaskRoadSectionTrafficFlow> findAllByTaskIdAndRoadSectionId(long taskId,
+	public List<TaskRoadSectionTrafficFlow> findByTaskIdAndRoadSectionId(long taskId,
 			long roadSectionId) {
 		Map<String, String> map = Maps.newHashMap();
 		map.put(TaskRoadSectionTrafficFlowMapper.TASK_ID, Long.toString(taskId));
 		map.put(TaskRoadSectionTrafficFlowMapper.ROAD_SECTION_ID, Long.toString(roadSectionId));
 		return mapper.selectByTaskIdAndRoadSectionId(map);
+	}
+
+	@Override
+	public List<TaskRoadSectionTrafficFlow> findByTaskId(long taskId) {
+		return mapper.selectByTaskId(taskId);
 	}
 
 }

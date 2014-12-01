@@ -40,7 +40,7 @@ public class CalculateServiceImpl implements CalculateService {
 		List<Result> ret = Lists.newArrayList();
 		final long taskId = task.getId();
 		// task and its related road sections
-		List<TaskRoadSectionPassingCarRecord> list = passCarDao.findUndoneByTaskId(taskId);
+		List<TaskRoadSectionPassingCarRecord> list = passCarDao.findByTaskId(taskId);
 		if (list.isEmpty()) {
 			return ret;
 		}
@@ -72,7 +72,7 @@ public class CalculateServiceImpl implements CalculateService {
 	public Double calculateAverageSpeed(Task task, RoadSection roadSection) {
 		long taskId = task.getId();
 		long roadSectionId = roadSection.getId();
-		List<TaskRoadSectionPassingCarRecord> result = passCarDao.findAllByTaskIdAndRoadSectionId(
+		List<TaskRoadSectionPassingCarRecord> result = passCarDao.findByTaskIdAndRoadSectionId(
 				taskId, roadSectionId);
 		if (result.isEmpty()) {
 			return null;
@@ -87,7 +87,7 @@ public class CalculateServiceImpl implements CalculateService {
 	public Long calculateTrafficFlow(Task task, RoadSection roadSection) {
 		long taskId = task.getId();
 		long roadSectionId = roadSection.getId();
-		List<TaskRoadSectionTrafficFlow> result = trafficFlowDao.findAllByTaskIdAndRoadSectionId(taskId, roadSectionId);
+		List<TaskRoadSectionTrafficFlow> result = trafficFlowDao.findByTaskIdAndRoadSectionId(taskId, roadSectionId);
 		if (result.isEmpty()) {
 			return null;
 		}

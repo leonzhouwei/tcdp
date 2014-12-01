@@ -18,7 +18,7 @@ public class TaskRoadSectionPassingCarRecordDaoImpl implements TaskRoadSectionPa
 	private TaskRoadSectionPassingCarRecordMapper mapper;
 	
 	@Override
-	public List<TaskRoadSectionPassingCarRecord> findAllByTaskIdAndRoadSectionId(long taskId,
+	public List<TaskRoadSectionPassingCarRecord> findByTaskIdAndRoadSectionId(long taskId,
 			long roadSectionId) {
 		Map<String, String> map = Maps.newHashMap();
 		map.put(TaskRoadSectionPassingCarRecordMapper.TASK_ID, Long.toString(taskId));
@@ -26,9 +26,13 @@ public class TaskRoadSectionPassingCarRecordDaoImpl implements TaskRoadSectionPa
 		return mapper.selectByTaskIdAndRoadSectionId(map);
 	}
 	
-	@Override
 	public List<TaskRoadSectionPassingCarRecord> findUndoneByTaskId(long taskId) {
 		return mapper.selectUndoneByTaskId(taskId);
+	}
+
+	@Override
+	public List<TaskRoadSectionPassingCarRecord> findByTaskId(long taskId) {
+		return mapper.selectByTaskId(taskId);
 	}
 
 }

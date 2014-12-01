@@ -6,8 +6,8 @@ import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionPassi
 
 public interface TaskRoadSectionPassingCarRecordDao {
 	
-	public List<TaskRoadSectionPassingCarRecord> findAllByTaskIdAndRoadSectionId(long taskId, long roadSectionId);
-
-	public List<TaskRoadSectionPassingCarRecord> findUndoneByTaskId(long taskId);
+	public List<TaskRoadSectionPassingCarRecord> findByTaskIdAndRoadSectionId(long taskId, long roadSectionId);
+	
+	public List<TaskRoadSectionPassingCarRecord> findByTaskId(long taskId);
 
 }
