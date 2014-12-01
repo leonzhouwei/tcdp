@@ -222,6 +222,9 @@ public class CalculateServiceImpl implements CalculateService {
 			// average speed
 			long absDeltaSeconds = absDeltaMillis / 1000;
 			logger.debug("delta seconds: " + absDeltaSeconds);
+			if (absDeltaSeconds == 0L) {
+				continue;
+			}
 			Double averageSpeed = length * SECONDS_PER_HOUR / absDeltaSeconds ;
 			result += averageSpeed;
 			effectiveCount += 1;
