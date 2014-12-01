@@ -21,7 +21,7 @@ public class CalculationController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CalculationController.class);
 	
-	@RequestMapping(value="/calculation", method=RequestMethod.GET)
+	@RequestMapping(value="/calculation", method=RequestMethod.POST)
     public ModelAndView echo(@RequestParam("taskId") String taskIdParam, @RequestParam("roadId") String roadIdParam) {  
 		logger.debug("task id: " + taskIdParam);
 		logger.debug("road id: " + roadIdParam);
