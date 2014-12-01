@@ -14,8 +14,8 @@ import com.google.common.collect.Maps;
 @Component
 public class TaskRoadSectionPassingCarRecordDaoImpl implements TaskRoadSectionPassingCarRecordDao {
 
-	private static final String TASK_ID = "taskId";
-	private static final String ROAD_SECTION_ID = "roadSectionId";
+	public static final String TASK_ID = "taskId";
+	public static final String ROAD_SECTION_ID = "roadSectionId";
 	
 	@Autowired
 	private TaskRoadSectionPassingCarRecordMapper mapper;

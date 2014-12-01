@@ -6,6 +6,9 @@ import com.example.trafficcarddataprocess.calculator.domain.Task;
 
 public interface TaskMapper {
 	
+	public static final String TASK_ID = "taskId";
+	public static final String ROAD_SECTION_ID = "roadSectionId";
+	
 	public List<Task> selectAllTasks();
 	
 	public Task selectTask(Long id);
