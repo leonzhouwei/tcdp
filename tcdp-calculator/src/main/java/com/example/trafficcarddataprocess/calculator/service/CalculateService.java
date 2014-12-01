@@ -10,22 +10,22 @@ public interface CalculateService {
 	
 	public List<Result> calculate(Task task);
 	
-	public Result calculate(Task task, RoadSection road);
+	public Result calculate(Task task, RoadSection roadSection);
 
 	/**
 	 * 
 	 * @param task
-	 * @param road
+	 * @param roadSection
 	 * @return speed in km/h
 	 */
-	public Double calculateAverageSpeed(Task task, RoadSection road);
+	public Double calculateAverageSpeed(Task task, RoadSection roadSection);
 	
 	/**
 	 * 
 	 * @param task
-	 * @param road
+	 * @param roadSection
 	 * @return  
 	 */
-	public Long calculateTrafficFlow(Task task, RoadSection road);
+	public Long calculateTrafficFlow(Task task, RoadSection roadSection);
 
 }

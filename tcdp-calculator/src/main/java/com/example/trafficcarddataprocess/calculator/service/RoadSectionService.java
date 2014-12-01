@@ -4,6 +4,6 @@ import com.example.trafficcarddataprocess.calculator.domain.RoadSection;
 
 public interface RoadSectionService {
 
-	public RoadSection findRoad(long id);
+	public RoadSection findRoadSection(long id);
 
 }

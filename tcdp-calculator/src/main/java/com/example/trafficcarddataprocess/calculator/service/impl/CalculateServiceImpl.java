@@ -47,7 +47,7 @@ public class CalculateServiceImpl implements CalculateService {
 		for (TaskRoadSectionPassingCarRecord e : list) {
 			// road section
 			long roadSectionId = e.getRoadSectionId();
-			RoadSection roadSection = roadService.findRoad(roadSectionId);
+			RoadSection roadSection = roadService.findRoadSection(roadSectionId);
 			Result result = calculate(task, roadSection);
 			ret.add(result);
 		}

@@ -24,15 +24,15 @@ public class TaskServiceImpl implements TaskService {
 		return taskMapper.selectTask(id);
 	}
 	
-	public Task findOneUndoneTask() {
+	public Task findFirstUndoneTask() {
 		// task
 		Task task = taskMapper.selectFirstWaitingTask();
 		return task;
 	}
 	
-	public void findOneUndoneTaskAndHandle() {
+	public void findFirstUndoneTaskAndHandle() {
 		// task
-		Task task = findOneUndoneTask();
+		Task task = findFirstUndoneTask();
 		if (task == null) {
 			return;
 		}

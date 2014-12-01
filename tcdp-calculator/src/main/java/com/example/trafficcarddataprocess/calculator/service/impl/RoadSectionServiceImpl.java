@@ -14,7 +14,7 @@ public class RoadSectionServiceImpl implements RoadSectionService {
 	private RoadSectionMapper roadMapper;
 	
 	@Override
-	public RoadSection findRoad(long id) {
+	public RoadSection findRoadSection(long id) {
 		return roadMapper.selectRoad(id);
 	}
 
