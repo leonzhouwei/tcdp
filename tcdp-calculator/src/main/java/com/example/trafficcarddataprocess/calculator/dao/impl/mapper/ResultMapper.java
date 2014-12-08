@@ -4,6 +4,6 @@ import com.example.trafficcarddataprocess.calculator.domain.Result;
 
 public interface ResultMapper {
 	
-	public Long insert(Result result);
+	public Integer insert(Result result);
 
 }
