@@ -4,11 +4,30 @@
 <mapper
 	namespace="com.example.trafficcarddataprocess.calculator.dao.impl.mapper.ResultMapper">
 
-	<insert id="insert" parameterType="com.example.trafficcarddataprocess.calculator.domain.Result">
-		INSERT INTO jiaotong_results 
-		 (id, task_id, road_id, travel_time, average_speed, speed_confidence, traffic_flow, flow_confidence) 
-		 VALUES 
-		 (seq_jiaotong_results_id.nextval, #{taskId}, #{roadSectionId}, #{travelTime}, #{averageSpeed}, #{averageSpeedConfidence}, #{trafficFlow}, #{trafficFlowConfidence})
+	<resultMap id="defaultResultMap"
+		type="com.example.trafficcarddataprocess.calculator.domain.Result">
+		<result property="id" column="id" />
+		<result property="taskId" column="task_id" />
+		<result property="roadSectionId" column="road_id" />
+        <result property="travelTime" column="travel_time" />
+        <result property="averageSpeed" column="average_speed" />
+        <result property="averageSpeedConfidence" column="speed_confidence" />
+        <result property="trafficFlow" column="traffic_flow" />
+        <result property="trafficFlowConfidence" column="flow_confidence" />
+	</resultMap>
+
+	<select id="selectAll" resultMap="defaultResultMap">
+		SELECT * FROM jiaotong_results
+	</select>
+
+	<insert id="insert"
+		parameterType="com.example.trafficcarddataprocess.calculator.domain.Result">
+		INSERT INTO jiaotong_results
+		(id, task_id, road_id, travel_time, average_speed, speed_confidence,
+		traffic_flow, flow_confidence)
+		VALUES
+		(seq_jiaotong_results_id.nextval, #{taskId}, #{roadSectionId}, #{travelTime}, #{averageSpeed},
+		#{averageSpeedConfidence}, #{trafficFlow}, #{trafficFlowConfidence})
 	</insert>
 
 </mapper>
