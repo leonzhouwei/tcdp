@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.trafficcarddataprocess.calculator.dao.impl.mapper.ResultMapper">
+
+	<insert id="insert" parameterType="com.example.trafficcarddataprocess.calculator.domain.Result">
+		INSERT INTO jiaotong_results 
+		 (id, task_id, road_id, travel_time, average_speed, speed_confidence, traffic_flow, flow_confidence) 
+		 VALUES 
+		 (seq_jiaotong_results_id.nextval, #{taskId}, #{roadSectionId}, #{travelTime}, #{averageSpeed}, #{averageSpeedConfidence}, #{trafficFlow}, #{trafficFlowConfidence})
+	</insert>
+
+</mapper>

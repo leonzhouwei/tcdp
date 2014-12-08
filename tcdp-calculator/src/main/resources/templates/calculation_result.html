@@ -36,6 +36,7 @@
 					<tr>
 						<th>任务 ID</th>
 						<th>路段 ID</th>
+						<th>旅行时间</th>
 						<th>平均速度 (km/h)</th>
 						<th>平均速度置信度</th>
 						<th>车流量</th>
@@ -46,6 +47,7 @@
 					<tr th:each="result : ${results}">
 						<td th:text="${result.taskId}">...</td>
 						<td th:text="${result.roadSectionId}">...</td>
+						<td th:text="${result.travelTime}">...</td>
 						<td th:text="${result.averageSpeed}">...</td>
 						<td th:text="${result.averageSpeedConfidence}">...</td>
 						<td th:text="${result.trafficFlow}">...</td>

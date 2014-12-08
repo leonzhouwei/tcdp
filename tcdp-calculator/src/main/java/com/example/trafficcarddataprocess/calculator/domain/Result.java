@@ -5,11 +5,11 @@ public class Result {
 	private Long id;
 	private Long taskId;
 	private Long roadSectionId;
+	private Long travelTime; // in seconds
 	private Double averageSpeed;
 	private Double averageSpeedConfidence;
 	private Long trafficFlow;
 	private Double trafficFlowConfidence;
-	private Integer status;
 
 	public Long getId() {
 		return id;
@@ -51,14 +51,6 @@ public class Result {
 		this.trafficFlowConfidence = trafficFlowConfidence;
 	}
 
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
 	public Long getTaskId() {
 		return taskId;
 	}
@@ -73,6 +65,14 @@ public class Result {
 
 	public void setRoadSectionId(Long roadSectionId) {
 		this.roadSectionId = roadSectionId;
+	}
+
+	public Long getTravelTime() {
+		return travelTime;
+	}
+
+	public void setTravelTime(Long travelTime) {
+		this.travelTime = travelTime;
 	}
 
 }
