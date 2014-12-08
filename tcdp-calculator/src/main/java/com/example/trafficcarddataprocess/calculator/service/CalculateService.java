@@ -11,6 +11,8 @@ public interface CalculateService {
 	public List<Result> calculate(Task task);
 	
 	public Result calculate(Task task, RoadSection roadSection);
+	
+	public Result calculateAverageSpeedAndTravelTime(Task task, RoadSection roadSection);
 
 	/**
 	 * 

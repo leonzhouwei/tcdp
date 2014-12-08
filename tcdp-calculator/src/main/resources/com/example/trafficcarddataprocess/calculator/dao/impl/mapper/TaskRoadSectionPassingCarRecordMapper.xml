@@ -5,7 +5,7 @@
 	namespace="com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskRoadSectionPassingCarRecordMapper">
 
     <sql id="defaultColumns">
-        id, task_id, road_id, car_no, pass_info, pass_count, status
+        id, task_id, road_id, car_no, pass_info, pass_count
     </sql>
 
 	<resultMap id="resultMap"
@@ -16,7 +16,6 @@
 		<result property="carNumber" column="car_no" />
 		<result property="passInfoJson" column="pass_info" />
 		<result property="cardCount" column="pass_count" />
-		<result property="status" column="status" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">

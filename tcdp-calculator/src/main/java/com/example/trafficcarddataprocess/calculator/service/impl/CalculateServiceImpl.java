@@ -64,15 +64,15 @@ public class CalculateServiceImpl implements CalculateService {
 	
 	@Override
 	public Result calculate(Task task, RoadSection roadSection) {
-		double averageSpeed = calculateAverageSpeed(task, roadSection);
+		Result speedAndTime = calculateAverageSpeedAndTravelTime(task, roadSection);
 		long trafficFlow = calculateTrafficFlow(task, roadSection);
 		Result result = new Result();
 		result.setId(-1L);
 		result.setTaskId(task.getId());
 		result.setRoadSectionId(roadSection.getId());
-		result.setAverageSpeed(averageSpeed);
+		result.setAverageSpeed(speedAndTime.getAverageSpeed());
 		result.setTrafficFlow(trafficFlow);
-		
+		result.setTravelTime(speedAndTime.getTravelTime());
 		return result;
 	}
 
@@ -89,6 +89,56 @@ public class CalculateServiceImpl implements CalculateService {
 		Double length = new Double(roadSection.getLength());
 		double ret = calculateAverageSpeed(result, length);
 		return ret;
+	}
+	
+	@Override
+	public Result calculateAverageSpeedAndTravelTime(Task task, RoadSection roadSection) {
+		long taskId = task.getId();
+		long roadSectionId = roadSection.getId();
+		List<TaskRoadSectionPassingCarRecord> result = passCarDao.findByTaskIdAndRoadSectionId(
+				taskId, roadSectionId);
+		if (result.isEmpty()) {
+			return null;
+		}
+
+		Double length = new Double(roadSection.getLength());
+		final Double averageSpeed = calculateAverageSpeed(result, length);
+		Result ret = new Result();
+		ret.setAverageSpeed(averageSpeed);
+		final Long travelSeconds = calculateTravelTime(result);
+		ret.setTravelTime(travelSeconds);
+		return ret;
+	}
+	
+	public static Long calculateTravelTime(List<TaskRoadSectionPassingCarRecord> result) {
+		// filter
+		List<List<TaskRoadSectionPassingCarRecordPassInfo>> samples = Lists.newArrayList();
+		for (TaskRoadSectionPassingCarRecord e : result) {
+			if (e.getCardCount() != 2) {
+				continue;
+			}
+			String json = e.getPassInfoJson();
+			List<TaskRoadSectionPassingCarRecordPassInfo> temp = TaskRoadSectionPassingCarRecordPassInfo.parseList(json);
+			if (temp.size() != 2) {
+				continue;
+			}
+			samples.add(temp);
+		}
+		if (samples.isEmpty()) {
+			return null;
+		}
+		// calculate
+		long travelMillis = 0;
+		for (List<TaskRoadSectionPassingCarRecordPassInfo> e : samples) {
+			TaskRoadSectionPassingCarRecordPassInfo one = e.get(0);
+			TaskRoadSectionPassingCarRecordPassInfo another = e.get(1);
+			long millisOne = one.getTime().getTime();
+			long millisAnother = another.getTime().getTime();
+			long deltaMillis = millisAnother - millisOne;
+			travelMillis += Math.abs(deltaMillis);
+		}
+		long travelSeconds = travelMillis / 1000 / samples.size();
+		return travelSeconds;
 	}
 	
 	@Override

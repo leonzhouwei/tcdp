@@ -286,5 +286,21 @@ public class CalculateServiceImplAlgorithmTest {
 		Long actual = CalculateServiceImpl.calculateTaskRoadTrafficFlow(list);
 		Assert.assertEquals(expected, actual);
 	}
+	
+	@Test
+	public void testCalculateTravelTime() {
+		final Long expected = 3600L;
+		String passInfoJson = "[{\"sbbh\":\"1\", \"gcsj\":\"2014-11-19 00:00:00\", \"clsd\":\"-75\"},{\"sbbh\":\"2\", \"gcsj\":\"2014-11-19 01:00:00\", \"clsd\":\"-85\"}]";
+		TaskRoadSectionPassingCarRecord record = new TaskRoadSectionPassingCarRecord();
+		record.setId(1L);
+		record.setTaskId(1L);
+		record.setRoadSectionId(1L);
+		record.setCardCount(2);
+		record.setCarNumber("TEST");
+		record.setPassInfoJson(passInfoJson);
+		List<TaskRoadSectionPassingCarRecord> list = Lists.newArrayList(record);
+		Long actual = CalculateServiceImpl.calculateTravelTime(list);
+		Assert.assertEquals(expected, actual);
+	}
 
 }

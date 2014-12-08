@@ -8,7 +8,6 @@ public class TaskRoadSectionPassingCarRecord {
 	private String carNumber;
 	private String passInfoJson;
 	private Integer cardCount;
-	private Integer status;
 
 	public Long getId() {
 		return id;
@@ -56,14 +55,6 @@ public class TaskRoadSectionPassingCarRecord {
 
 	public void setCardCount(Integer cardCount) {
 		this.cardCount = cardCount;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
 	}
 
 }
