@@ -10,4 +10,6 @@ public interface ResultDao {
 	
 	public List<Result> findAll();
 
+	public void save(List<Result> results);
+
 }

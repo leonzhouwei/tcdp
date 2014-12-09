@@ -20,6 +20,7 @@ import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionTraff
 import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionTrafficFlowPassInfo;
 import com.example.trafficcarddataprocess.calculator.service.CalculateService;
 import com.example.trafficcarddataprocess.calculator.service.RoadSectionService;
+import com.example.trafficcarddataprocess.calculator.service.TaskService;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -36,6 +37,8 @@ public class CalculateServiceImpl implements CalculateService {
 	private TaskRoadSectionTrafficFlowDao trafficFlowDao;
 	@Autowired
 	private RoadSectionService roadService;
+	@Autowired
+	private TaskService taskService;
 	
 	@Override
 	public List<Result> calculate(Task task) {
@@ -125,7 +128,7 @@ public class CalculateServiceImpl implements CalculateService {
 			samples.add(temp);
 		}
 		if (samples.isEmpty()) {
-			return null;
+			return Result.DEFAULT_TRAVEL_TIME;
 		}
 		// calculate
 		long travelMillis = 0;
@@ -147,7 +150,7 @@ public class CalculateServiceImpl implements CalculateService {
 		long roadSectionId = roadSection.getId();
 		List<TaskRoadSectionTrafficFlow> result = trafficFlowDao.findByTaskIdAndRoadSectionId(taskId, roadSectionId);
 		if (result.isEmpty()) {
-			return null;
+			return Result.DEFAULT_TRAFFIC_FLOW;
 		}
 		long ret = calculateTaskRoadTrafficFlow(result);
 		return ret;
@@ -190,7 +193,7 @@ public class CalculateServiceImpl implements CalculateService {
 			return calculateDoubleCardTaskRoadAverageSpeed(length, list);
 		} else {
 			logger.debug("invalid-card-number task road section");
-			return null;
+			return Result.DEFAULT_AVERAGE_SPEED;
 		}
 	}
 	
@@ -220,7 +223,7 @@ public class CalculateServiceImpl implements CalculateService {
 			}
 			return calculateDoubleCardTaskRoadTrafficFlow(infoList);
 		} else {
-			return null;
+			return Result.DEFAULT_TRAFFIC_FLOW;
 		}
 	}
 	
@@ -231,7 +234,7 @@ public class CalculateServiceImpl implements CalculateService {
 	 */
 	public static Double calculateSingleCardTaskRoadAverageSpeed(Collection<TaskRoadSectionPassingCarRecordPassInfo> c) {
 		if (c.isEmpty()) {
-			return null;
+			return Result.DEFAULT_AVERAGE_SPEED;
 		}
 		
 		Double result = DOUBLE_ZERO;
@@ -254,7 +257,7 @@ public class CalculateServiceImpl implements CalculateService {
 	public static Double calculateDoubleCardTaskRoadAverageSpeed(Double length, Collection<List<TaskRoadSectionPassingCarRecordPassInfo>> c) {
 		logger.debug("road length(km): " + length);
 		if (c.isEmpty() || length.compareTo(DOUBLE_ZERO) <= 0) {
-			return null;
+			return Result.DEFAULT_AVERAGE_SPEED;
 		}
 		
 		Double result = DOUBLE_ZERO;
@@ -291,7 +294,7 @@ public class CalculateServiceImpl implements CalculateService {
 	
 	public static Long calculateSingleCardTaskRoadTrafficFlow(Collection<TaskRoadSectionTrafficFlowPassInfo> c) {
 		if (c.isEmpty()) {
-			return null;
+			return Result.DEFAULT_TRAFFIC_FLOW;
 		}
 		
 		long sum = 0;
@@ -308,6 +311,16 @@ public class CalculateServiceImpl implements CalculateService {
 		}
 		result /= 2;
 		return result;
+	}
+
+	@Override
+	public List<Result> calculate(long taskId) {
+		List<Result> ret = Lists.newArrayList();
+		Task task = taskService.findTask(taskId);
+		if (task == null) {
+			return ret;
+		}
+		return calculate(task);
 	}
 
 }

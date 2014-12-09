@@ -8,6 +8,8 @@ import com.example.trafficcarddataprocess.calculator.domain.Task;
 
 public interface CalculateService {
 	
+	public List<Result> calculate(long taskId);
+	
 	public List<Result> calculate(Task task);
 	
 	public Result calculate(Task task, RoadSection roadSection);

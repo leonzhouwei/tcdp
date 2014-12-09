@@ -1,15 +1,20 @@
 package com.example.trafficcarddataprocess.calculator.domain;
 
 public class Result {
+	
+	public static final Double DEFAULT_AVERAGE_SPEED = -1.0;
+	public static final Double DEFAULT_CONFIDENCE = -1.0;
+	public static final Long DEFAULT_TRAFFIC_FLOW = -1L;
+	public static final Long DEFAULT_TRAVEL_TIME = -1L;
 
-	private Long id;
-	private Long taskId;
-	private Long roadSectionId;
-	private Long travelTime; // in seconds
-	private Double averageSpeed;
-	private Double averageSpeedConfidence;
-	private Long trafficFlow;
-	private Double trafficFlowConfidence;
+	private Long id = -1L;
+	private Long taskId = -1L;
+	private Long roadSectionId = -1L;
+	private Long travelTime = -1L; // in seconds
+	private Double averageSpeed = DEFAULT_AVERAGE_SPEED;
+	private Double averageSpeedConfidence = DEFAULT_CONFIDENCE;
+	private Long trafficFlow = DEFAULT_TRAFFIC_FLOW;
+	private Double trafficFlowConfidence = DEFAULT_CONFIDENCE;
 
 	public Long getId() {
 		return id;

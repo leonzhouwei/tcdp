@@ -25,4 +25,14 @@ public class ResultDaoImpl implements ResultDao {
 		return resultMapper.selectAll();
 	}
 
+	@Override
+	public void save(List<Result> results) {
+		if (results.isEmpty()) {
+			return;
+		}
+		for (Result e : results) {
+			resultMapper.insert(e);
+		}
+	}
+
 }
