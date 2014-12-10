@@ -24,6 +24,10 @@ public class CalculateServiceImplTest {
 	private RoadSectionServiceImpl roadSectionService;
 	@Autowired
 	private CalculateServiceImpl calculateService;
+	
+	@Test
+	public void nop() {
+	}
 
 	public void testCalculateAverageSpeedTaskRoad_1() {
 		final long taskId = 39L;

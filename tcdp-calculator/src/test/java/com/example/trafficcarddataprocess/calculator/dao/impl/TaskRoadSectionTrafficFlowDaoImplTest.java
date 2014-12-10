@@ -2,6 +2,7 @@ package com.example.trafficcarddataprocess.calculator.dao.impl;
 
 import java.util.List;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -17,6 +18,10 @@ public class TaskRoadSectionTrafficFlowDaoImplTest {
 	@Autowired
 	private TaskRoadSectionTrafficFlowDaoImpl dao;
 
+	@Test
+	public void nop() {
+	}
+	
 	public void testFindByTaskId() {
 		final long taskId = 39L;
 		List<TaskRoadSectionTrafficFlow> result = dao.findByTaskId(taskId);

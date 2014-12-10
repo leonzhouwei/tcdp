@@ -2,6 +2,7 @@ package com.example.trafficcarddataprocess.calculator.dao.impl.mapper;
 
 import java.util.List;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -18,6 +19,10 @@ public class TaskMapperTest {
 	@Autowired
 	private TaskMapper taskMapper;
 
+	@Test
+	public void nop() {
+	}
+	
 	public void testSelectAll() {
 		List<Task> result = taskMapper.selectAllTasks();
 		for (Task e : result) {

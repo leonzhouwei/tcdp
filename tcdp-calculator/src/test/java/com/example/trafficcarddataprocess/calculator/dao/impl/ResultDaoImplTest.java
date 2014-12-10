@@ -1,5 +1,6 @@
 package com.example.trafficcarddataprocess.calculator.dao.impl;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -12,9 +13,13 @@ import com.example.trafficcarddataprocess.calculator.domain.Result;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)
 public class ResultDaoImplTest {
-	
+
 	@Autowired
 	private ResultDao dao;
+
+	@Test
+	public void nop() {
+	}
 
 	public void testSave() {
 		Result result = new Result();
@@ -27,6 +32,5 @@ public class ResultDaoImplTest {
 		result.setTrafficFlowConfidence(0.1);
 		dao.save(result);
 	}
-
 
 }

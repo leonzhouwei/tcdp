@@ -11,6 +11,10 @@ import org.junit.Test;
 public class TaskRoadSectionPassingCarRecordPassInfoTest {
 
 	@Test
+	public void nop() {
+	}
+
+	@Test
 	public void testParseList() throws ParseException {
 		final String expectedDeviceNumber = "1";
 		final Date expectedDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")

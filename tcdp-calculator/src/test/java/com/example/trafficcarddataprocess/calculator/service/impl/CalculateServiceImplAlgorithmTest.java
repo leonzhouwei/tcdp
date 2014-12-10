@@ -14,6 +14,10 @@ import com.google.common.collect.Lists;
 public class CalculateServiceImplAlgorithmTest {
 	
 	@Test
+	public void nop() {
+	}
+	
+	@Test
 	public void testCalculateSingleCardTaskRoadAverageSpeed() {
 		final Double expected = new Double(80.0);
 		String json = "[{\"sbbh\":\"1\", \"gcsj\":\"2014-11-19 08:14:00\", \"clsd\":\"80\"}]";

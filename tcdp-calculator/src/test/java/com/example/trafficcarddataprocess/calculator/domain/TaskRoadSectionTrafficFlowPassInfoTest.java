@@ -10,6 +10,10 @@ import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionTraff
 public class TaskRoadSectionTrafficFlowPassInfoTest {
 
 	@Test
+	public void nop() {
+	}
+	
+	@Test
 	public void testParseList() {
 		final String expectedDeviceNumber = "1";
 		final Integer expectedPassCarCount = 177;

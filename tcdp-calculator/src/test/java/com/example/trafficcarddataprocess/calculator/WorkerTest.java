@@ -17,6 +17,10 @@ public class WorkerTest {
 	
 	@Autowired
 	private Worker worker;
+	
+	@Test
+	public void nop() {
+	}
 
 	@Test
 	public void testWork() {
