@@ -2,6 +2,8 @@ package com.example.trafficcarddataprocess.calculator;
 
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -17,15 +19,22 @@ import org.springframework.context.annotation.ImportResource;
 @EnableAutoConfiguration
 public class App {
 	
+	private static ConfigurableApplicationContext cac;
+	
+	private static final Logger logger = LoggerFactory.getLogger(App.class);
+	
 	@Value("${server.port}")
 	private int port;
 	@Value("${server.sessionTimeout}")
 	private int sessionTimeout;
+	@Value("${worker.count}")
+	private int workerCount;
 	
 	public static void main(String[] args) {
-		ConfigurableApplicationContext cac = SpringApplication.run(App.class, args);
-		Worker worker = cac.getBean(Worker.class);
-		startWorkers(worker);
+		App.cac = SpringApplication.run(App.class, args);
+		App app = cac.getBean(App.class);
+		app.logStatus();
+		app.startWorkers();
 	}
 	
 	@Bean
@@ -36,11 +45,16 @@ public class App {
 	    return factory;
 	}
 	
-	static void startWorkers(Worker worker) {
+	public void logStatus() {
+		logger.info("worker count: " + workerCount);
+	}
+	
+	public void startWorkers() {
+		Worker worker = cac.getBean(Worker.class);
 		Thread thread = new Thread(worker);
 		thread.start();
 	}
-
+	
 }
 
 @Configuration
