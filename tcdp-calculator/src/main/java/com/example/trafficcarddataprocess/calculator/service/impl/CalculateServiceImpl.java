@@ -334,7 +334,7 @@ public class CalculateServiceImpl implements CalculateService {
 			return Result.DEFAULT_CONFIDENCE;
 		}
 		List<TaskRoadSectionPassingCarRecord> filtered = filterSpeedSamples(list);
-		logger.debug("filtered speed samples size: " + filtered.size());
+		logger.debug("filtered speed sample size: " + filtered.size());
 		if (filtered.isEmpty()) {
 			return Result.DEFAULT_CONFIDENCE;
 		}
