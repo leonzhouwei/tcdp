@@ -1,4 +1,4 @@
-package com.example.trafficcarddataprocess.calculator.dao.impl;
+package com.example.trafficcarddataprocess.calculator.dao;
 
 import java.util.List;
 
@@ -13,10 +13,10 @@ import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionPassi
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)
-public class TaskRoadSectionPassingCarRecordDaoImplTest {
+public class TaskRoadSectionPassingCarRecordDaoTest {
 	
 	@Autowired
-	private TaskRoadSectionPassingCarRecordDaoImpl dao;
+	private TaskRoadSectionPassingCarRecordDao dao;
 
 	@Test
 	public void nop() {

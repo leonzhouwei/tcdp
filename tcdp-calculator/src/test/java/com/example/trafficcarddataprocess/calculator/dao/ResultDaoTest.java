@@ -25,19 +25,6 @@ public class ResultDaoTest {
 	}
 
 	public void testSave() {
-		Result result = new Result();
-		result.setTaskId(1L);
-		result.setRoadSectionId(1L);
-		result.setTravelTime(1L);
-		result.setAverageSpeed(1.1);
-		result.setAverageSpeedConfidence(0.1);
-		result.setTrafficFlow(1L);
-		result.setTrafficFlowConfidence(0.1);
-		dao.save(result);
-	}
-	
-	@Test
-	public void testSave_2() {
 		final Long taskId = 39L;
 		Result result = new Result();
 		result.setTaskId(1L);

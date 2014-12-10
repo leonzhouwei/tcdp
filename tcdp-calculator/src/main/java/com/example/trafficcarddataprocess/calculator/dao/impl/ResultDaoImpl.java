@@ -21,11 +21,6 @@ public class ResultDaoImpl implements ResultDao {
 	private TaskMapper taskMapper;
 
 	@Override
-	public void save(Result result) {
-		resultMapper.insert(result);
-	}
-
-	@Override
 	public List<Result> findAll() {
 		return resultMapper.selectAll();
 	}

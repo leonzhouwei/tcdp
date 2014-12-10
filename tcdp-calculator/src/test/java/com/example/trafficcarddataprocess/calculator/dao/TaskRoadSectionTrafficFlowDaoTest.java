@@ -1,4 +1,4 @@
-package com.example.trafficcarddataprocess.calculator.dao.impl;
+package com.example.trafficcarddataprocess.calculator.dao;
 
 import java.util.List;
 
@@ -9,14 +9,15 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.example.trafficcarddataprocess.calculator.App;
+import com.example.trafficcarddataprocess.calculator.dao.TaskRoadSectionTrafficFlowDao;
 import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionTrafficFlow;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)
-public class TaskRoadSectionTrafficFlowDaoImplTest {
+public class TaskRoadSectionTrafficFlowDaoTest {
 	
 	@Autowired
-	private TaskRoadSectionTrafficFlowDaoImpl dao;
+	private TaskRoadSectionTrafficFlowDao dao;
 
 	@Test
 	public void nop() {
