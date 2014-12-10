@@ -1,6 +1,7 @@
 package com.example.trafficcarddataprocess.calculator;
 
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,11 +14,13 @@ import com.example.trafficcarddataprocess.calculator.common.CommonDefine;
 import com.example.trafficcarddataprocess.calculator.domain.Result;
 import com.example.trafficcarddataprocess.calculator.service.CalculateService;
 import com.example.trafficcarddataprocess.calculator.service.ResultService;
+import com.google.common.collect.Queues;
 
 @Component
 @Scope(CommonDefine.BEAN_SCOPE_PROTOTYPE)
-public class Worker {
+public class Worker implements Runnable {
 	
+	private static final long SLEEP_MILLIS = 10000;
 	private static final Logger logger = LoggerFactory.getLogger(Worker.class);
 	
 	@Autowired
@@ -25,7 +28,10 @@ public class Worker {
 	@Autowired
 	private ResultService resultService;
 	
-	public List<Result> work(long taskId) {
+	private ConcurrentLinkedQueue<Long> taskIds = Queues.newConcurrentLinkedQueue();
+	
+	List<Result> work(long taskId) {
+		logger.debug("----- task#" + taskId + " START -----");
 		List<Result> results = calculateService.calculate(taskId);
 		if (results.isEmpty()) {
 			return results;
@@ -37,7 +43,32 @@ public class Worker {
 		}
 		
 		resultService.save(taskId, results);
+		logger.debug("===== task#" + taskId + "  END  -----");
 		return results;
 	}
 
+	@Override
+	public void run() {
+		while (true) {
+			try {
+				if (taskIds.isEmpty()) {
+					logger.debug("no waiting task found");
+					Thread.sleep(SLEEP_MILLIS);
+					continue;
+				}
+				Long taskId = taskIds.poll();
+				if (taskId == null) {
+					continue;
+				}
+				work(taskId);
+			} catch (Exception e) {
+				logger.warn(e.getMessage());
+			}
+		}
+	}
+	
+	public boolean addTask(Long taskId) {
+		return taskIds.add(taskId);
+	}
+	
 }

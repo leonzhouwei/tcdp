@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +23,9 @@ public class App {
 	private int sessionTimeout;
 	
 	public static void main(String[] args) {
-		SpringApplication.run(App.class, args);
+		ConfigurableApplicationContext cac = SpringApplication.run(App.class, args);
+		Worker worker = cac.getBean(Worker.class);
+		startWorkers(worker);
 	}
 	
 	@Bean
@@ -31,6 +34,11 @@ public class App {
 	    factory.setPort(port);
 	    factory.setSessionTimeout(sessionTimeout, TimeUnit.SECONDS);
 	    return factory;
+	}
+	
+	static void startWorkers(Worker worker) {
+		Thread thread = new Thread(worker);
+		thread.start();
 	}
 
 }

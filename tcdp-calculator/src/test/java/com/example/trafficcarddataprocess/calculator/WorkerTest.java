@@ -17,12 +17,13 @@ public class WorkerTest {
 	
 	@Autowired
 	private Worker worker;
+	@Autowired
+	private Worker worker2;
 	
 	@Test
 	public void nop() {
 	}
 
-	@Test
 	public void testWork() {
 		final Long taskId = 39L;
 		List<Result> c = worker.work(taskId);
@@ -31,5 +32,10 @@ public class WorkerTest {
 			System.out.println(json);
 		}
 	}
-
+	
+	public void testMultiInstance() {
+		System.out.println(worker);
+		System.out.println(worker2);
+	}
+	
 }
