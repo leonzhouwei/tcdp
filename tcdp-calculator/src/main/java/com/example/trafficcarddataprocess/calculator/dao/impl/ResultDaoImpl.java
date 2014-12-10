@@ -1,5 +1,6 @@
 package com.example.trafficcarddataprocess.calculator.dao.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class ResultDaoImpl implements ResultDao {
 	}
 
 	@Override
-	public void save(List<Result> results) {
+	public void save(Collection<Result> results) {
 		if (results.isEmpty()) {
 			return;
 		}
@@ -39,10 +40,9 @@ public class ResultDaoImpl implements ResultDao {
 	}
 
 	@Override
-	public void save(long taskId, List<Result> results) {
+	public void save(long taskId, Collection<Result> results) {
 		save(results);
 		taskMapper.updateAsDone(taskId);
 	}
-
 
 }
