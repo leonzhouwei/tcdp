@@ -3,7 +3,7 @@ package com.example.trafficcarddataprocess.calculator.domain;
 public class Result {
 	
 	public static final Double DEFAULT_AVERAGE_SPEED = -1.0;
-	public static final Double DEFAULT_CONFIDENCE = -1.0;
+	public static final Double DEFAULT_CONFIDENCE = 0.0;
 	public static final Long DEFAULT_TRAFFIC_FLOW = -1L;
 	public static final Long DEFAULT_TRAVEL_TIME = -1L;
 

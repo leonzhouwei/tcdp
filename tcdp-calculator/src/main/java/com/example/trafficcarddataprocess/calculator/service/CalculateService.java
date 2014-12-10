@@ -14,22 +14,4 @@ public interface CalculateService {
 	
 	public Result calculate(Task task, RoadSection roadSection);
 	
-	public Result calculateAverageSpeedAndTravelTime(Task task, RoadSection roadSection);
-
-	/**
-	 * 
-	 * @param task
-	 * @param roadSection
-	 * @return speed in km/h
-	 */
-	public Double calculateAverageSpeed(Task task, RoadSection roadSection);
-	
-	/**
-	 * 
-	 * @param task
-	 * @param roadSection
-	 * @return  
-	 */
-	public Long calculateTrafficFlow(Task task, RoadSection roadSection);
-
 }

@@ -67,19 +67,20 @@ public class CalculateServiceImpl implements CalculateService {
 	
 	@Override
 	public Result calculate(Task task, RoadSection roadSection) {
-		Result speedAndTime = calculateAverageSpeedAndTravelTime(task, roadSection);
-		long trafficFlow = calculateTrafficFlow(task, roadSection);
+		Result speedAndTime = calculateAverageSpeedAndConfidenceAndTravelTime(task, roadSection);
+		Result trafficFlow = calculateTrafficFlowAndConfidence(task, roadSection);
 		Result result = new Result();
 		result.setId(-1L);
 		result.setTaskId(task.getId());
 		result.setRoadSectionId(roadSection.getId());
 		result.setAverageSpeed(speedAndTime.getAverageSpeed());
-		result.setTrafficFlow(trafficFlow);
+		result.setAverageSpeedConfidence(speedAndTime.getAverageSpeedConfidence());
+		result.setTrafficFlow(trafficFlow.getTrafficFlow());
+		result.setTrafficFlowConfidence(trafficFlow.getTrafficFlowConfidence());
 		result.setTravelTime(speedAndTime.getTravelTime());
 		return result;
 	}
 
-	@Override
 	public Double calculateAverageSpeed(Task task, RoadSection roadSection) {
 		long taskId = task.getId();
 		long roadSectionId = roadSection.getId();
@@ -94,8 +95,7 @@ public class CalculateServiceImpl implements CalculateService {
 		return ret;
 	}
 	
-	@Override
-	public Result calculateAverageSpeedAndTravelTime(Task task, RoadSection roadSection) {
+	public Result calculateAverageSpeedAndConfidenceAndTravelTime(Task task, RoadSection roadSection) {
 		long taskId = task.getId();
 		long roadSectionId = roadSection.getId();
 		List<TaskRoadSectionPassingCarRecord> result = passCarDao.findByTaskIdAndRoadSectionId(
@@ -107,8 +107,10 @@ public class CalculateServiceImpl implements CalculateService {
 		Double length = new Double(roadSection.getLength());
 		final Double averageSpeed = calculateAverageSpeed(result, length);
 		Result ret = new Result();
-		ret.setAverageSpeed(averageSpeed);
+		final Double speedConfidence = calculateAverageSpeedConfidence(task, result);
 		final Long travelSeconds = calculateTravelTime(result);
+		ret.setAverageSpeed(averageSpeed);
+		ret.setAverageSpeedConfidence(speedConfidence);
 		ret.setTravelTime(travelSeconds);
 		return ret;
 	}
@@ -144,15 +146,18 @@ public class CalculateServiceImpl implements CalculateService {
 		return travelSeconds;
 	}
 	
-	@Override
-	public Long calculateTrafficFlow(Task task, RoadSection roadSection) {
+	public Result calculateTrafficFlowAndConfidence(Task task, RoadSection roadSection) {
+		Result ret = new Result();
 		long taskId = task.getId();
 		long roadSectionId = roadSection.getId();
 		List<TaskRoadSectionTrafficFlow> result = trafficFlowDao.findByTaskIdAndRoadSectionId(taskId, roadSectionId);
 		if (result.isEmpty()) {
-			return Result.DEFAULT_TRAFFIC_FLOW;
+			return ret;
 		}
-		long ret = calculateTaskRoadTrafficFlow(result);
+		Long trafficFlow = calculateTaskRoadTrafficFlow(result);
+		ret.setTrafficFlow(trafficFlow);
+		Double confidence = calculateTrafficFlowConfidence(task, result);
+		ret.setTrafficFlowConfidence(confidence);
 		return ret;
 	}
 	
@@ -322,5 +327,75 @@ public class CalculateServiceImpl implements CalculateService {
 		}
 		return calculate(task);
 	}
-
+	
+	static double calculateAverageSpeedConfidence(Task task, List<TaskRoadSectionPassingCarRecord> list) {
+		logger.debug("expected speed sample size: " + task.getExpectedSampleCapacity());
+		if (task.getExpectedSampleCapacity() < 1) {
+			return Result.DEFAULT_CONFIDENCE;
+		}
+		List<TaskRoadSectionPassingCarRecord> filtered = filterSpeedSamples(list);
+		logger.debug("filtered speed samples size: " + filtered.size());
+		if (filtered.isEmpty()) {
+			return Result.DEFAULT_CONFIDENCE;
+		}
+		final double actualSampleSize = filtered.size();
+		final double expectedSampleSize = task.getExpectedSampleCapacity();
+		final double confidence = actualSampleSize / expectedSampleSize;
+		logger.debug("average speed confidence: " + confidence);
+		return confidence;
+	}
+	
+	static List<TaskRoadSectionPassingCarRecord> filterSpeedSamples(List<TaskRoadSectionPassingCarRecord> list) {
+		List<TaskRoadSectionPassingCarRecord> ret = Lists.newArrayList();
+		if (list.isEmpty()) {
+			return ret;
+		}
+		// filter
+		TaskRoadSectionPassingCarRecord first = list.get(0);
+		final int expectedCardCount = first.getCardCount();
+		for (TaskRoadSectionPassingCarRecord e : list) {
+			int cardCount = e.getCardCount();
+			if (cardCount != expectedCardCount) {
+				continue;
+			}
+			ret.add(e);
+		}
+		return ret;
+	}
+	
+	static double calculateTrafficFlowConfidence(Task task, List<TaskRoadSectionTrafficFlow> list) {
+		logger.debug("expected traffic flow sample size: " + task.getExpectedSampleCapacity());
+		if (task.getExpectedSampleCapacity() < 1) {
+			return Result.DEFAULT_CONFIDENCE;
+		}
+		List<TaskRoadSectionTrafficFlow> filtered = filterTrafficFlowSamples(list);
+		logger.debug("filtered traffic flow sample size: " + filtered.size());
+		if (filtered.isEmpty()) {
+			return Result.DEFAULT_CONFIDENCE;
+		}
+		final double actualSampleSize = filtered.size();
+		final double expectedSampleSize = task.getExpectedSampleCapacity();
+		final double confidence = actualSampleSize / expectedSampleSize;
+		logger.debug("traffic flow confidence: " + confidence);
+		return confidence;
+	}
+	
+	static List<TaskRoadSectionTrafficFlow> filterTrafficFlowSamples(List<TaskRoadSectionTrafficFlow> list) {
+		List<TaskRoadSectionTrafficFlow> ret = Lists.newArrayList();
+		if (list.isEmpty()) {
+			return ret;
+		}
+		// filter
+		TaskRoadSectionTrafficFlow first = list.get(0);
+		final int expectedCardCount = first.getCardCount();
+		for (TaskRoadSectionTrafficFlow e : list) {
+			int cardCount = e.getCardCount();
+			if (cardCount != expectedCardCount) {
+				continue;
+			}
+			ret.add(e);
+		}
+		return ret;
+	}
+	
 }
