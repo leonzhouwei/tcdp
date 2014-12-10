@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,8 @@ import com.google.common.collect.Queues;
 @Scope(CommonDefine.BEAN_SCOPE_PROTOTYPE)
 public class Worker implements Runnable {
 	
-	private static final long SLEEP_MILLIS = 10000;
+	@Value("${worker.sleep.millis}")
+	private long SLEEP_MILLIS;
 	private static final Logger logger = LoggerFactory.getLogger(Worker.class);
 	
 	@Autowired
@@ -69,6 +71,10 @@ public class Worker implements Runnable {
 	
 	public boolean addTask(Long taskId) {
 		return taskIds.add(taskId);
+	}
+	
+	public long getSleepMillis() {
+		return SLEEP_MILLIS;
 	}
 	
 }
