@@ -33,5 +33,9 @@
             WHERE inner.status1 = 1 AND inner.status2 = 0
         )
     </select>
+    
+    <update id="updateAsDone" parameterType="long">
+        UPDATE jiaotong_task SET status2 = 1 WHERE id = #{id}
+    </update>
 
 </mapper>

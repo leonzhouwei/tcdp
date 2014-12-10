@@ -12,4 +12,6 @@ public interface ResultDao {
 
 	public void save(List<Result> results);
 
+	public void save(long taskId, List<Result> results);
+
 }

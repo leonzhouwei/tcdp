@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 import com.example.trafficcarddataprocess.calculator.dao.TaskRoadSectionPassingCarRecordDao;
 import com.example.trafficcarddataprocess.calculator.dao.TaskRoadSectionTrafficFlowDao;
+import com.example.trafficcarddataprocess.calculator.dao.impl.mapper.RoadSectionMapper;
+import com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskMapper;
 import com.example.trafficcarddataprocess.calculator.domain.Result;
 import com.example.trafficcarddataprocess.calculator.domain.RoadSection;
 import com.example.trafficcarddataprocess.calculator.domain.Task;
@@ -19,8 +21,6 @@ import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionPassi
 import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionTrafficFlow;
 import com.example.trafficcarddataprocess.calculator.domain.TaskRoadSectionTrafficFlowPassInfo;
 import com.example.trafficcarddataprocess.calculator.service.CalculateService;
-import com.example.trafficcarddataprocess.calculator.service.RoadSectionService;
-import com.example.trafficcarddataprocess.calculator.service.TaskService;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -36,9 +36,9 @@ public class CalculateServiceImpl implements CalculateService {
 	@Autowired
 	private TaskRoadSectionTrafficFlowDao trafficFlowDao;
 	@Autowired
-	private RoadSectionService roadService;
+	private RoadSectionMapper roadSectionMapper;
 	@Autowired
-	private TaskService taskService;
+	private TaskMapper taskMapper;
 	
 	@Override
 	public List<Result> calculate(Task task) {
@@ -58,7 +58,7 @@ public class CalculateServiceImpl implements CalculateService {
 			} else {
 				roadSectionIds.add(roadSectionId);
 			}
-			RoadSection roadSection = roadService.findRoadSection(roadSectionId);
+			RoadSection roadSection = roadSectionMapper.selectRoad(roadSectionId);
 			Result result = calculate(task, roadSection);
 			ret.add(result);
 		}
@@ -316,7 +316,7 @@ public class CalculateServiceImpl implements CalculateService {
 	@Override
 	public List<Result> calculate(long taskId) {
 		List<Result> ret = Lists.newArrayList();
-		Task task = taskService.findTask(taskId);
+		Task task = taskMapper.selectTask(taskId);
 		if (task == null) {
 			return ret;
 		}

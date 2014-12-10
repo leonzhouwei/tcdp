@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.trafficcarddataprocess.calculator.dao.ResultDao;
 import com.example.trafficcarddataprocess.calculator.dao.impl.mapper.ResultMapper;
+import com.example.trafficcarddataprocess.calculator.dao.impl.mapper.TaskMapper;
 import com.example.trafficcarddataprocess.calculator.domain.Result;
 
 @Component
@@ -14,6 +15,8 @@ public class ResultDaoImpl implements ResultDao {
 	
 	@Autowired
 	private ResultMapper resultMapper;
+	@Autowired
+	private TaskMapper taskMapper;
 
 	@Override
 	public void save(Result result) {
@@ -34,5 +37,12 @@ public class ResultDaoImpl implements ResultDao {
 			resultMapper.insert(e);
 		}
 	}
+
+	@Override
+	public void save(long taskId, List<Result> results) {
+		save(results);
+		taskMapper.updateAsDone(taskId);
+	}
+
 
 }

@@ -36,7 +36,7 @@ public class Worker {
 			logger.debug(json);
 		}
 		
-		resultDao.save(results);
+		resultDao.save(taskId, results);
 		return results;
 	}
 

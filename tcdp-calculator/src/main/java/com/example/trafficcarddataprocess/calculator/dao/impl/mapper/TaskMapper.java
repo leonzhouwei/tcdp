@@ -15,4 +15,6 @@ public interface TaskMapper {
 
 	public Task selectFirstWaitingTask();
 
+	public void updateAsDone(Long id);
+
 }
