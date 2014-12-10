@@ -11,8 +11,6 @@ public interface ResultDao {
 	
 	public List<Result> findAll();
 
-	public void save(Collection<Result> results);
-
 	public void save(long taskId, Collection<Result> results);
 
 }

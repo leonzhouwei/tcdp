@@ -1,4 +1,4 @@
-package com.example.trafficcarddataprocess.calculator.dao.impl;
+package com.example.trafficcarddataprocess.calculator.dao;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import com.google.common.collect.Lists;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)
-public class ResultDaoImplTest {
+public class ResultDaoTest {
 
 	@Autowired
 	private ResultDao dao;
@@ -36,6 +36,7 @@ public class ResultDaoImplTest {
 		dao.save(result);
 	}
 	
+	@Test
 	public void testSave_2() {
 		final Long taskId = 39L;
 		Result result = new Result();

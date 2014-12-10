@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.trafficcarddataprocess.calculator.common.CommonDefine;
-import com.example.trafficcarddataprocess.calculator.dao.ResultDao;
 import com.example.trafficcarddataprocess.calculator.domain.Result;
 import com.example.trafficcarddataprocess.calculator.service.CalculateService;
+import com.example.trafficcarddataprocess.calculator.service.ResultService;
 
 @Component
 @Scope(CommonDefine.BEAN_SCOPE_PROTOTYPE)
@@ -23,7 +23,7 @@ public class Worker {
 	@Autowired
 	private CalculateService calculateService;
 	@Autowired
-	private ResultDao resultDao;
+	private ResultService resultService;
 	
 	public List<Result> work(long taskId) {
 		List<Result> results = calculateService.calculate(taskId);
@@ -36,7 +36,7 @@ public class Worker {
 			logger.debug(json);
 		}
 		
-		resultDao.save(taskId, results);
+		resultService.save(taskId, results);
 		return results;
 	}
 

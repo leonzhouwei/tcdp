@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.trafficcarddataprocess.calculator.dao.ResultDao;
 import com.example.trafficcarddataprocess.calculator.dao.impl.mapper.ResultMapper;
@@ -30,18 +31,11 @@ public class ResultDaoImpl implements ResultDao {
 	}
 
 	@Override
-	public void save(Collection<Result> results) {
-		if (results.isEmpty()) {
-			return;
-		}
+	@Transactional(rollbackFor=Exception.class)
+	public void save(long taskId, Collection<Result> results) {
 		for (Result e : results) {
 			resultMapper.insert(e);
 		}
-	}
-
-	@Override
-	public void save(long taskId, Collection<Result> results) {
-		save(results);
 		taskMapper.updateAsDone(taskId);
 	}
 
