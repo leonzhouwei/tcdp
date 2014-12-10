@@ -3,7 +3,6 @@ package com.example.trafficcarddataprocess.calculator.dao.impl.mapper;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -21,7 +20,6 @@ public class TaskRoadSectionTrafficFlowMapperTest {
 	@Autowired
 	private TaskRoadSectionTrafficFlowMapper mapper;
 
-	@Test
 	public void testSelectAll() {
 		List<TaskRoadSectionTrafficFlow> result = mapper.selectAll();
 		for (TaskRoadSectionTrafficFlow e : result) {
@@ -30,7 +28,6 @@ public class TaskRoadSectionTrafficFlowMapperTest {
 		}
 	}
 
-	@Test
 	public void testSelectByTaskIdAndRoadSectionId() {
 		final Long taskId = 39L;
 		final Long roadSectionId = 42595700548L;
@@ -48,7 +45,6 @@ public class TaskRoadSectionTrafficFlowMapperTest {
 				+ result.size());
 	}
 
-	@Test
 	public void testSelectByTaskId() {
 		final Long taskId = 39L;
 		List<TaskRoadSectionTrafficFlow> result = mapper.selectByTaskId(taskId);

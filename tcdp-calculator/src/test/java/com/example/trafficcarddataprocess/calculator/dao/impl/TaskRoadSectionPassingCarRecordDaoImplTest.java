@@ -2,7 +2,6 @@ package com.example.trafficcarddataprocess.calculator.dao.impl;
 
 import java.util.List;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -18,14 +17,12 @@ public class TaskRoadSectionPassingCarRecordDaoImplTest {
 	@Autowired
 	private TaskRoadSectionPassingCarRecordDaoImpl dao;
 
-	@Test
 	public void testFindByTaskId() {
 		final long taskId = 39L;
 		List<TaskRoadSectionPassingCarRecord> result = dao.findByTaskId(taskId);
 		System.out.println("testFindByTaskId(): " + result.size());
 	}
 	
-	@Test
 	public void testFindByTaskIdAndRoadSectionId() {
 		final long taskId = 39L;
 		final long roadSectionId = 42595700560L;

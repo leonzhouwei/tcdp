@@ -1,6 +1,5 @@
 package com.example.trafficcarddataprocess.calculator.dao.impl.mapper;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -17,7 +16,6 @@ public class RoadSectionMapperTest {
 	@Autowired
 	private RoadSectionMapper roadMapper;
 
-	@Test
 	public void testSelectRoad() {
 		final Long id = 42595700548L;
 		RoadSection road = roadMapper.selectRoad(id);
