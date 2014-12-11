@@ -32,7 +32,6 @@ public class Worker implements Runnable {
 	private ConcurrentLinkedQueue<Long> taskIds = Queues.newConcurrentLinkedQueue();
 	
 	List<Result> work(long taskId) {
-		logger.debug("----- task#" + taskId + " START -----");
 		List<Result> results = calculateService.calculate(taskId);
 		if (results.isEmpty()) {
 			return results;
@@ -46,7 +45,6 @@ public class Worker implements Runnable {
 		if (this.saveEnabled.get()) {
 			resultService.save(taskId, results);
 		}
-		logger.debug("===== task#" + taskId + "  END  -----");
 		return results;
 	}
 
@@ -58,7 +56,10 @@ public class Worker implements Runnable {
 				if (taskId == null) {
 					continue;
 				}
+				final long startMillis = System.currentTimeMillis();
 				work(taskId);
+				final long endMillis = System.currentTimeMillis();
+				logTimeCost(taskId, startMillis, endMillis);
 			} catch (Exception e) {
 				logger.warn(e.getMessage());
 			}
@@ -71,6 +72,13 @@ public class Worker implements Runnable {
 	
 	public void enableSave() {
 		this.saveEnabled.set(true);
+	}
+	
+	public static void logTimeCost(final long taskId, final long startMillis, final long endMillis) {
+		final long deltaMillis = endMillis - startMillis;
+		logger.info("task#" + taskId + " start millis: " + startMillis);
+		logger.info("task#" + taskId + "   end millis: " + endMillis);
+		logger.info("task#" + taskId + " delta millis: " + deltaMillis);
 	}
 	
 }

@@ -23,7 +23,7 @@
         </triggeringPolicy>
     </appender>
     
-    <logger name="com.example.trafficcarddataprocess.calculator" level="DEBUG">  
+    <logger name="com.example.trafficcarddataprocess.calculator" level="INFO">  
         <appender-ref ref="FILE" />  
     </logger>  
 
