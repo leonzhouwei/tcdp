@@ -24,18 +24,12 @@
         SELECT * FROM jiaotong_task WHERE id = #{id}
     </select>
     
-    <select id="selectFirstWaitingTask" resultMap="taskResultMap">
-        SELECT t.* 
-        FROM jiaotong_task t 
-        WHERE t.id = (
-            SELECT MIN(inner.id) 
-            FROM jiaotong_task inner 
-            WHERE inner.status1 = 1 AND inner.status2 = 0
-        )
+    <select id="selectUndoneTasks" resultMap="taskResultMap">
+        SELECT * FROM jiaotong_task WHERE status2 = 0
     </select>
     
-    <update id="updateAsDone" parameterType="long">
-        UPDATE jiaotong_task SET status2 = 1 WHERE id = #{id}
+    <update id="updateStatus" parameterType="map">
+        UPDATE jiaotong_task SET status2 = #{newStatus} WHERE id = #{id} AND status2 = #{oldStatus}
     </update>
 
 </mapper>
