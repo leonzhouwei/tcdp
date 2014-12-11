@@ -31,7 +31,7 @@ public class ResultDaoImpl implements ResultDao {
 		for (Result e : results) {
 			resultMapper.insert(e);
 		}
-		taskMapper.updateAsDone(taskId);
+		TaskDaoImpl.updateStatusAsDoneById(taskMapper, taskId);
 	}
 
 }
