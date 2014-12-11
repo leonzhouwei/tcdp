@@ -32,7 +32,7 @@ public class TaskDaoImpl implements TaskDao {
 	@Transactional(rollbackFor=Exception.class)
 	public List<Task> findUndoneTasksAndSetStatusAsInProgess() {
 		List<Task> undone = taskMapper.selectUndoneTasks();
-		updateStatusAsDone(taskMapper, undone);
+		updateStatusAsInProress(taskMapper, undone);
 		return undone;
 	}
 	
@@ -64,6 +64,18 @@ public class TaskDaoImpl implements TaskDao {
 			ids.add(e.getId());
 		}
 		updateStatusAsDoneByIds(taskMapper, ids);
+	}
+	
+	public static void updateStatusAsInProgessByIds(TaskMapper taskMapper, Collection<Long> taskIds) {
+		updateStatusByIds(taskMapper, taskIds, TaskMapper.STATUS_UNDONE, TaskMapper.STATUS_IN_PROGRESS);
+	}
+	
+	public static void updateStatusAsInProress(TaskMapper taskMapper, Collection<Task> tasks) {
+		List<Long> ids = Lists.newArrayList();
+		for (Task e : tasks) {
+			ids.add(e.getId());
+		}
+		updateStatusAsInProgessByIds(taskMapper, ids);
 	}
 
 }

@@ -38,8 +38,4 @@ public class WorkerTest {
 		System.out.println(worker2);
 	}
 	
-	public void testGetSleepMillis() {
-		System.out.println(worker.getSleepMillis());
-	}
-	
 }
