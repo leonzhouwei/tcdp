@@ -27,7 +27,7 @@ public class Worker implements Runnable {
 	private CalculateService calculateService;
 	@Autowired
 	private ResultService resultService;
-	private AtomicBoolean saveEnabled = new AtomicBoolean(false);
+	private AtomicBoolean saveEnabled = new AtomicBoolean(true);
 	
 	private ConcurrentLinkedQueue<Long> taskIds = Queues.newConcurrentLinkedQueue();
 	

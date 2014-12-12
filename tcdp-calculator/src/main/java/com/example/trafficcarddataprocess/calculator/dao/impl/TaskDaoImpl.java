@@ -49,7 +49,7 @@ public class TaskDaoImpl implements TaskDao {
 	}
 	
 	public static void updateStatusAsDoneByIds(TaskMapper taskMapper, Collection<Long> taskIds) {
-		updateStatusByIds(taskMapper, taskIds, TaskMapper.STATUS_IN_PROGRESS, TaskMapper.STATUS_UNDONE);
+		updateStatusByIds(taskMapper, taskIds, TaskMapper.STATUS_IN_PROGRESS, TaskMapper.STATUS_DONE);
 	}
 	
 	public static void updateStatusAsDoneById(TaskMapper taskMapper, Long id) {
